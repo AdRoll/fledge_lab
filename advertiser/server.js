@@ -24,7 +24,7 @@ app.get('/:name', (req, res) => {
     res.sendFile(__dirname + '/public/' + req.params.name + '.html');
 });
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 

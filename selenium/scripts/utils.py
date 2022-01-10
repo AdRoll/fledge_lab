@@ -7,6 +7,7 @@ import seaborn as sns
 OUTPUT_DIR = '/opt/output'
 LOGGING_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 
+
 def get_browser(extra_args: List[str] = []):
     """Gets new browser instance (with clean memory/cache).
 
@@ -18,8 +19,7 @@ def get_browser(extra_args: List[str] = []):
         webdriver.Chrome: Chromium instance controlled with the Selenium driver.
     """
     args = ['--no-sandbox', '--no-first-run', '--disable-gpu', '--disable-sync',
-            '--disable-dev-shm-usage', 
-            os.environ['FLEDGE_FLAGS']] + extra_args
+            '--disable-dev-shm-usage', os.environ['FLEDGE_FLAGS']] + extra_args
     options = webdriver.ChromeOptions()
     for arg in args:
         options.add_argument(arg)
@@ -40,10 +40,10 @@ def prepare_output_path(filename: str, suffix: str = '') -> str:
     base_path = os.path.basename(filename)
     base_filename = os.path.splitext(base_path)[0] + suffix
     target_path = os.path.join(OUTPUT_DIR, base_filename)
-    
+
     if not os.path.exists(target_path):
         os.makedirs(target_path)
-    
+
     return target_path
 
 
@@ -67,13 +67,13 @@ def produce_before_after_maintenance_chart(path: str):
             if 'Dynamic Ad:' in line:
                 relevant_lines.append((after_maintenance, line))
 
-    maintenance = [a for a,b in relevant_lines]
-    bids = [int(b.split('-')[-1].replace('\n', '')) for a,b in relevant_lines]
+    maintenance = [a for a, _ in relevant_lines]
+    bids = [int(b.split('-')[-1].replace('\n', '')) for _, b in relevant_lines]
 
     n_diff_bids = len(set(bids))
     df = pd.DataFrame({'After Maintenance?': maintenance, 'Winning Bid': bids})
 
-    sns.set(rc = {'figure.figsize':(14,6)})
+    sns.set(rc={'figure.figsize': (14, 6)})
     g = sns.histplot(data=df, x='Winning Bid', hue='After Maintenance?', bins=n_diff_bids, discrete=True)
     g.set_title('Number of Winning Bids per Price, Before and After Maintenance')
     g.get_figure().savefig(os.path.join(path, '_winning_bids.png'))

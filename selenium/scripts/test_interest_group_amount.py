@@ -1,6 +1,5 @@
 import time
 import os
-import sys
 import logging
 import argparse
 import utils
@@ -8,14 +7,18 @@ from PIL import Image
 import pytesseract
 
 parser = argparse.ArgumentParser(description='Test how many IGs we can join')
-parser.add_argument('-n', '--n-IGs', dest='n_ig', type=int, help='How many IGs to join for test')
-parser.add_argument('-b', '--n-samples-before-maintenance', dest='n_samples_before_maintenance', type=int, default=1, help='Number of samples to collect before maintenance')
-parser.add_argument('-a', '--n-samples-after-maintenance', dest='n_samples_after_maintenance', type=int, default=1, help='Number of samples to collect after maintenance')
+parser.add_argument('-n', '--n-IGs', dest='n_ig', type=int,
+                    help='How many IGs to join for test')
+parser.add_argument('-b', '--n-samples-before-maintenance', dest='n_samples_before_maintenance',
+                    type=int, default=1, help='Number of samples to collect before maintenance')
+parser.add_argument('-a', '--n-samples-after-maintenance', dest='n_samples_after_maintenance',
+                    type=int, default=1, help='Number of samples to collect after maintenance')
 args = parser.parse_args()
 assert args.n_ig > 0 and args.n_samples_after_maintenance > 0
 
 output_path = utils.prepare_output_path(__file__, suffix=f"_{args.n_ig}")
-logging.basicConfig(filename=os.path.join(output_path, 'log'), filemode='w', level=logging.DEBUG, format=utils.LOGGING_FORMAT)
+logging.basicConfig(filename=os.path.join(output_path, 'log'), filemode='w',
+                    level=logging.DEBUG, format=utils.LOGGING_FORMAT)
 browser = utils.get_browser()
 
 
@@ -31,8 +34,6 @@ browser.save_screenshot(os.path.join(output_path, 'publisher_before_join.png'))
 for i in reversed(range(1, args.n_ig + 1)):
     browser.get(f"https://advertiser/dynamic?name=success-ig-{i}&bid={i}")
     logging.info(f"visited advertiser (join dynamic IG with bid {i})")
-
-
 
 for sample_i in range(args.n_samples_before_maintenance + args.n_samples_after_maintenance):
     if sample_i == args.n_samples_before_maintenance:

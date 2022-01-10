@@ -5,7 +5,8 @@ import utils
 
 
 output_path = utils.prepare_output_path(__file__)
-logging.basicConfig(filename=os.path.join(output_path, 'log'), filemode='w', level=logging.DEBUG, format=utils.LOGGING_FORMAT)
+logging.basicConfig(filename=os.path.join(output_path, 'log'), filemode='w',
+                    level=logging.DEBUG, format=utils.LOGGING_FORMAT)
 browser = utils.get_browser()
 logging.info(f"Chromium version: {browser.capabilities['browserVersion']}")
 
@@ -22,7 +23,7 @@ for url_advertiser, image_name in URLS_IMAGES:
         browser.get(url_advertiser)  # join the IG
     browser.get('https://publisher/')  # trigger auction & show winning ad
     time.sleep(0.5)  # wait a little to make sure we screenshot after completion
-    browser.save_screenshot(os.path.join(output_path, image_name)) 
+    browser.save_screenshot(os.path.join(output_path, image_name))
 
 
 browser.quit()

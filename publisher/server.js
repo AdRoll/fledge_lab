@@ -14,7 +14,7 @@ const server = https.createServer({
   }, app);
 
 // routes
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
     res.header('X-Allow-FLEDGE', 'true');
     res.header('supports-loading-mode', 'fenced-frame');
     res.sendFile(__dirname + '/public/index.html');

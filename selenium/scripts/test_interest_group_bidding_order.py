@@ -1,6 +1,5 @@
 import time
 import os
-import sys
 import logging
 import argparse
 import utils
@@ -8,14 +7,18 @@ from PIL import Image
 import pytesseract
 
 parser = argparse.ArgumentParser(description='Test how many IGs we can join')
-parser.add_argument('-n', '--n-IGs', dest='n_ig', type=int, help='How many IGs to join for test')
-parser.add_argument('-w', '--wait', dest='wait', type=int, default=0, help='How many seconds to wait before starting to collect samples')
-parser.add_argument('-s', '--n-samples', dest='n_samples', type=int, default=1, help='Number of samples to collect')
+parser.add_argument('-n', '--n-IGs', dest='n_ig', type=int,
+                    help='How many IGs to join for test')
+parser.add_argument('-w', '--wait', dest='wait', type=int, default=0,
+                    help='How many seconds to wait before starting to collect samples')
+parser.add_argument('-s', '--n-samples', dest='n_samples', type=int, default=1,
+                    help='Number of samples to collect')
 args = parser.parse_args()
 assert args.n_ig > 0 and args.wait >= 0 and args.n_samples > 0
 
 output_path = utils.prepare_output_path(__file__, suffix=f"_{args.n_ig}")
-logging.basicConfig(filename=os.path.join(output_path, 'log'), filemode='w', level=logging.DEBUG, format=utils.LOGGING_FORMAT)
+logging.basicConfig(filename=os.path.join(output_path, 'log'), filemode='w',
+                    level=logging.DEBUG, format=utils.LOGGING_FORMAT)
 browser = utils.get_browser()
 
 

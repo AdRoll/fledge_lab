@@ -5,7 +5,8 @@ import utils
 
 
 output_path = utils.prepare_output_path(__file__)
-logging.basicConfig(filename=os.path.join(output_path, 'log'), filemode='w', level=logging.DEBUG, format=utils.LOGGING_FORMAT)
+logging.basicConfig(filename=os.path.join(output_path, 'log'), filemode='w',
+                    level=logging.DEBUG, format=utils.LOGGING_FORMAT)
 browser = utils.get_browser()
 
 

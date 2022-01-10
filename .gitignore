@@ -7,3 +7,5 @@ dsp/bidding-logic-wasm/pkg/
 dsp/bidding-logic-wasm/target/
 .vscode/
 *.zip
+.DS_store
+__pycache__/
