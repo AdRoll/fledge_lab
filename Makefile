@@ -15,3 +15,7 @@ clear-certs:
 
 clear-output:
 	rm -rf output/*
+
+install-hooks:
+	pip install --user pre-commit
+	pre-commit install
