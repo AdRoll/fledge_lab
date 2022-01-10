@@ -31,6 +31,3 @@ python denial_of_service.py --n-total 10 --n-samples 8 --n-dsp 1
 
 # remain idle (useful for using VNC)
 sleep 24h
-
-
-

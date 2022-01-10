@@ -45,7 +45,7 @@ Run `make build && make run` will build and launch all the necessary containers 
 
 If you wish to manually launch a script you can enter the **selenium** container, `cd` to `scripts` and run `python my_selenium_script.py` where the script is one of those available in [selenium/scripts/](selenium/scripts/).
 
-If you wish to use the browser inside the lab as you would on your own computer, which can be useful for learning and debugging, you can [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing) into the **selenium** container using port *5900* and password *fledgevnc*. [TigerVNC](https://github.com/TigerVNC/tigervnc/releases)'s client works well for this purpose. 
+If you wish to use the browser inside the lab as you would on your own computer, which can be useful for learning and debugging, you can [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing) into the **selenium** container using port *5900* and password *fledgevnc*. [TigerVNC](https://github.com/TigerVNC/tigervnc/releases)'s client works well for this purpose.
 
 Once in the VNC session, you can launch a FLEDGE-enabled browser by running `./launch_browser.sh`
 
@@ -77,7 +77,7 @@ for url_advertiser, image_name in URLS_IMAGES:
         browser.get(url_advertiser)  # join the IG
     browser.get('https://publisher/')  # trigger auction & show winning ad
     time.sleep(0.5)  # wait a little to make sure we screenshot after completion
-    browser.save_screenshot(os.path.join(output_path, image_name)) 
+    browser.save_screenshot(os.path.join(output_path, image_name))
 ```
 
 This includes taking a screenshot of every page we saw in the manual example as well. Please note the `time.sleep` used after visiting the publisher (i.e. after triggering the auction). This in order to make sure that the auction was able to complete and the page was able to render the ad. Under some circumstances involving heavy load you may need to increase the delay if you want to capture a screenshot of the result.
@@ -216,7 +216,7 @@ You *could* pass this data to your own WebAssembly function and have it return y
 
 ### How Do I Use WASM (WebAssembly) In My Bidding Logic/Model?
 
-This is preliminary work but see [dsp/public/bidding_logic_wasm.js](dsp/public/bidding_logic_wasm.js) and [dsp/bidding-logic-wasm/](dsp/bidding-logic-wasm/), particularly [lib.rs](dsp/bidding-logic-wasm/src/lib.rs). Rust + [wasm-pack](https://github.com/rustwasm/wasm-pack) make it easy to build your *wasm* file from your Rust code. 
+This is preliminary work but see [dsp/public/bidding_logic_wasm.js](dsp/public/bidding_logic_wasm.js) and [dsp/bidding-logic-wasm/](dsp/bidding-logic-wasm/), particularly [lib.rs](dsp/bidding-logic-wasm/src/lib.rs). Rust + [wasm-pack](https://github.com/rustwasm/wasm-pack) make it easy to build your *wasm* file from your Rust code.
 
 Getting the *wasm* into your JS is a little more complicated. It could be embedded or maybe fetched from somewhere else. Ideally it would be fetched from a cache in the browser. These things are yet to be resolved.
 

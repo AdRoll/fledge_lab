@@ -20,7 +20,7 @@ RUN mkcert -install
 # .Xauthority is required by VNC to be able to use a display
 RUN apt install -y tigervnc-standalone-server xorg && \
     mkdir $HOME/.vnc && echo fledgevnc | vncpasswd -f > $HOME/.vnc/passwd && \
-    touch $HOME/.Xauthority 
+    touch $HOME/.Xauthority
 ENV DISPLAY=:0
 
 # Install Chromium dependencies
@@ -30,7 +30,7 @@ RUN apt install -y gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6
                     libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates \
                     fonts-liberation libappindicator1 lsb-release xdg-utils
 
-# Install Chromium 
+# Install Chromium
 ARG CHROMIUM_REVISION
 RUN wget http://commondatastorage.googleapis.com/chromium-browser-snapshots/Linux_x64/$CHROMIUM_REVISION/chrome-linux.zip && \
     unzip chrome-linux.zip && \

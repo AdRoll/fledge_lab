@@ -1,9 +1,9 @@
 version: "3.9"
 services:
   advertiser: &node_base_server
-    build: 
+    build:
       dockerfile: Dockerfile-basenode
-      args: 
+      args:
         - SERVER_LOCATION=advertiser
     ports:
       - "127.0.0.1:3000:443"
@@ -12,23 +12,23 @@ services:
       - DEBUG=express:*
   publisher:
     <<: *node_base_server
-    build: 
+    build:
       dockerfile: Dockerfile-basenode
-      args: 
+      args:
         - SERVER_LOCATION=publisher
     ports:
       - "127.0.0.1:3001:443"
   ssp:
     <<: *node_base_server
-    build: 
+    build:
       dockerfile: Dockerfile-basenode
-      args: 
+      args:
         - SERVER_LOCATION=ssp
     ports:
       - "127.0.0.1:3002:443"
   dsp:
     <<: *node_base_server
-    build: 
+    build:
       context: dsp/
     ports:
       - "127.0.0.1:3003:443"
@@ -41,7 +41,7 @@ services:
           dsp44, dsp45, dsp46, dsp47, dsp48, dsp49, dsp50, dsp51, dsp52, dsp53, dsp54,
           dsp55, dsp56, dsp57, dsp58, dsp59, dsp60, dsp61, dsp62, dsp63]
   selenium:
-    build: 
+    build:
       context: selenium/
       args:
         - CHROMIUM_REVISION=956493  # 99.0.4813.0 2022-01-07

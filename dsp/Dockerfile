@@ -21,7 +21,7 @@ RUN npm install express
 ##### Rust portion for WASM
 # TODO: add multi-stage build? Image size is not a concern for this at the moment though
 # Install Rust and wasm-pack
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y 
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:$PATH"
 RUN curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 

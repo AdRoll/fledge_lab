@@ -21,14 +21,14 @@
         trustedBiddingSignalsUrl: 'https://dsp/bidding_signal.json',
         trustedBiddingSignalsKeys: ['key1', 'key2'],
         dailyUpdateUrl: 'https://dsp/daily_update_url',
-        userBiddingSignals: { 
+        userBiddingSignals: {
             user_bidding_signals: 'user_bidding_signals'
         },
         ads: [{
                 renderUrl: 'https://advertiser/ads/general-ad',
         }]
     };
-    
+
     document.addEventListener('DOMContentLoaded', async(e) => {
         console.log(e);
         const kSecsPerDay = 3600 * 24 * 30;

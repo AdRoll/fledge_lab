@@ -18,7 +18,7 @@ app.get('/:name', (req, res) => {
   res.header('supports-loading-mode', 'fenced-frame');
 
   let ext =  req.params.name.split('.').pop();
-  
+
   if (req.params.name == ext) {  // no extension
     res.sendFile(__dirname + '/public/' + req.params.name + '.html');
   } else {

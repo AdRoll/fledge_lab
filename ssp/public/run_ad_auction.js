@@ -10,7 +10,7 @@ const auctionConfig = {
         'https://dsp': { per_buyer_signals: 'per_buyer_signals' },
         // ...
     },
-    perBuyerTimeouts: { 
+    perBuyerTimeouts: {
         'https://dsp': 50,
         // ...
     }
@@ -25,9 +25,8 @@ document.addEventListener("DOMContentLoaded", async(e) => {
         fencedFrameWithAd.src = result;
         fencedFrameWithAd.setAttribute('width', '400');
         fencedFrameWithAd.setAttribute('height', '100');
-        document.body.appendChild(fencedFrameWithAd); 
+        document.body.appendChild(fencedFrameWithAd);
     } else {
         document.body.innerText = 'Nothing to show';
     }
 });
-
