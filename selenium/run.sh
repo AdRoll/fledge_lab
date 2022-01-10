@@ -19,14 +19,15 @@ chrome --version
 
 cd scripts
 
-# python auction.py
+python auction.py
 python dynamic_auction.py
-# python dynamic_auction_multi_dsp.py
+python dynamic_auction_multi_dsp.py
 python wasm_outside_worklet.py
 python dynamic_wasm_auction.py
-# python find_interest_group_size.py
-# python test_interest_group_amount.py --n-IGs 10 --n-samples-before-maintenance 3 --n-samples-after-maintenance 3
-# python denial_of_service.py --n-total 10 --n-samples 8 --n-dsp 1
+
+python find_interest_group_size.py
+python test_interest_group_amount.py --n-IGs 10 --n-samples-before-maintenance 3 --n-samples-after-maintenance 3
+python denial_of_service.py --n-total 10 --n-samples 8 --n-dsp 1
 
 # remain idle (useful for using VNC)
 sleep 24h
