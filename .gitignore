@@ -9,3 +9,4 @@ dsp/bidding-logic-wasm/target/
 *.zip
 .DS_store
 __pycache__/
+*.pyc
