@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="data:,">
+        <title>DSP - WASM</title>
+    </head>
+
+    <body>
+        <h1>Testing WASM in a normal page outside the worklets...</h1>
+        <hr>
+        <p id='wasm'></p>
+    </body>
+
+</html>
+
+<script src="bidding_logic_wasm.js"></script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const bid = urlParams.get('bid');
+
+    // function generateBid(interestGroup, auctionSignals, perBuyerSignals, trustedBiddingSignals, browserSignals)
+    document.getElementById('wasm').innerText = generateBid(
+            {
+                userBiddingSignals: { bid: parseFloat(bid) },
+                ads: [{ renderUrl: '' }]
+            },  // interestGroup
+            undefined,  // auctionSignals
+            undefined,  // perBuyerSignals
+            undefined,  // trustedBiddingSignals
+            undefined   // browserSignals
+        ).bid;
+</script>

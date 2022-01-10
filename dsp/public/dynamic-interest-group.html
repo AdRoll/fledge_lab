@@ -1,0 +1,46 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>DSP</title>
+    </head>
+
+    <body></body>
+
+</html>
+
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    const bid = urlParams.get('bid');
+    const payloadSize = urlParams.get('payloadSize');
+    const biddingLogicName = urlParams.get('biddingLogicName');
+
+    const { origin } = new URL(window.location);  // e.g. https://dsp, done dynamically to accommodate for multiple DSPs
+    const biddingLogicUrl = biddingLogicName == null ? `${origin}/bidding_logic.js` : `${origin}/${biddingLogicName}.js`;
+    
+    const interestGroup = {
+        owner: origin,
+        name: name,
+        biddingLogicUrl: biddingLogicUrl,
+        trustedBiddingSignalsUrl: `${origin}/bidding_signal.json`,
+        trustedBiddingSignalsKeys: ['key1', 'key2'],
+        dailyUpdateUrl: `${origin}/daily_update_url`,
+        userBiddingSignals: { 
+                bid: parseFloat(bid),
+                payload: 'A'.repeat(parseInt(payloadSize))
+        },
+        ads: [{
+                renderUrl: 'https://advertiser/ads/dynamic-ad?name=' + name,
+        }]
+    };
+    
+    document.addEventListener('DOMContentLoaded', async(e) => {
+        const kSecsPerDay = 3600 * 24 * 30;
+        console.log(await navigator.joinAdInterestGroup(interestGroup, kSecsPerDay));
+    });
+</script>

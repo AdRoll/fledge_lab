@@ -1,0 +1,65 @@
+version: "3.9"
+services:
+  advertiser: &node_base_server
+    build: 
+      dockerfile: Dockerfile-basenode
+      args: 
+        - SERVER_LOCATION=advertiser
+    ports:
+      - "127.0.0.1:3000:443"
+    environment:
+      - PORT=443
+      - DEBUG=express:*
+  publisher:
+    <<: *node_base_server
+    build: 
+      dockerfile: Dockerfile-basenode
+      args: 
+        - SERVER_LOCATION=publisher
+    ports:
+      - "127.0.0.1:3001:443"
+  ssp:
+    <<: *node_base_server
+    build: 
+      dockerfile: Dockerfile-basenode
+      args: 
+        - SERVER_LOCATION=ssp
+    ports:
+      - "127.0.0.1:3002:443"
+  dsp:
+    <<: *node_base_server
+    build: 
+      context: dsp/
+    ports:
+      - "127.0.0.1:3003:443"
+    networks:
+      default:
+        aliases: [dsp0, dsp1, dsp2, dsp3, dsp4, dsp5, dsp6, dsp7, dsp8, dsp9, dsp10,
+          dsp11, dsp12, dsp13, dsp14, dsp15, dsp16, dsp17, dsp18, dsp19, dsp20, dsp21,
+          dsp22, dsp23, dsp24, dsp25, dsp26, dsp27, dsp28, dsp29, dsp30, dsp31, dsp32,
+          dsp33, dsp34, dsp35, dsp36, dsp37, dsp38, dsp39, dsp40, dsp41, dsp42, dsp43,
+          dsp44, dsp45, dsp46, dsp47, dsp48, dsp49, dsp50, dsp51, dsp52, dsp53, dsp54,
+          dsp55, dsp56, dsp57, dsp58, dsp59, dsp60, dsp61, dsp62, dsp63]
+  selenium:
+    build: 
+      context: selenium/
+      args:
+        - CHROMIUM_REVISION=956493  # 99.0.4813.0 2022-01-07
+        # - CHROMIUM_REVISION=953895  # 99.0.4785.0 2021-12-23
+        # - CHROMIUM_REVISION=953180  # 99.0.4780.0  2021-12-21
+        # - CHROMIUM_REVISION=951455  # 99.0.4766.0  2021-12-14
+        # - CHROMIUM_REVISION=942350  # 98.0.4710.0  2021-11-17
+        # - CHROMIUM_REVISION=938248  # 97.0.4692.0  2021-11-04
+        # - CHROMIUM_REVISION=929514  # 96.0.4664.0  2021-10-08
+    depends_on:
+      - advertiser
+      - dsp
+      - ssp
+      - publisher
+    ports:
+      - "127.0.0.1:5900:5900"  # for VNC access
+    environment:
+      - FLEDGE_FLAGS=--enable-features=InterestGroupStorage,AdInterestGroupAPI,Fledge,FencedFrames
+    volumes:
+      - ./output:/opt/output
+      - ./selenium/scripts:/opt/scripts
