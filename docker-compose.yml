@@ -44,7 +44,8 @@ services:
     build:
       context: selenium/
       args:
-        - CHROMIUM_REVISION=956493  # 99.0.4813.0 2022-01-07
+        - CHROMIUM_REVISION=961137  # 99.0.4841.0 2022-01-19 - WASM was enabled
+        # - CHROMIUM_REVISION=956493  # 99.0.4813.0 2022-01-07
         # - CHROMIUM_REVISION=953895  # 99.0.4785.0 2021-12-23
         # - CHROMIUM_REVISION=953180  # 99.0.4780.0  2021-12-21
         # - CHROMIUM_REVISION=951455  # 99.0.4766.0  2021-12-14

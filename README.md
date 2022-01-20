@@ -122,11 +122,7 @@ As a side note, this script also uses dynamic IG with an added parameter, the bi
 
 This will ask the interest group to use `https://dsp/bidding_logic_wasm.js` (actually found in `dsp/public/bidding_logic_wasm.js`). This feature could be useful as so far the two bidding functions are extremely simple (i.e. bid what was given by the *bid* url parameter) to allow for easy testing of passing a parameter (*bid* in this case) but we will obviously want to make use of more complicated bidding functions that incorporate models and this could be a way to do it.
 
-As of now `generateBid` works in *wasm_outside_worklet* but in the worklet/auction it throws:
-
-> Worklet error: https://dsp/bidding_logic_wasm.js execution of `generateBid` timed out.
-
-The error is the same even using a function that does nothing and that does not interfere with a hardcoded bid.
+WASM started working around January 19th, 2022 (99.0.4812.0).
 
 #### *find_interest_group_size*
 
