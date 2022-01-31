@@ -61,6 +61,7 @@ services:
       - "127.0.0.1:5900:5900"  # for VNC access
     environment:
       - FLEDGE_FLAGS=--enable-features=InterestGroupStorage,AdInterestGroupAPI,Fledge,FencedFrames
+      - ARAPI_FLAGS=--flag-switches-begin --enable-experimental-web-platform-features --flag-switches-end
     volumes:
       - ./output:/opt/output
       - ./selenium/scripts:/opt/scripts

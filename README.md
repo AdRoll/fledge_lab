@@ -166,6 +166,10 @@ python denial_of_service.py --n-total 200 --n-samples 200 --n-dsp 2
 python denial_of_service.py --n-total 200 --n-samples 200 --n-dsp 1
 ```
 
+#### *arapi_click*
+
+This script tests that the Attribution Reporting API (ARAPI, previously known as Conversion Measurement API or CMAPI) works. It does so by visiting an ARAPI-enabled ad, clicking on it and taking a screenshot of the browser's conversion internals.
+
 ### Logging
 
 Every script uses or at least should use logging. The standard Python logger is used without too many bells and whistles. If the pattern of the current scripts is used, the outputs will be saved to `output/my_script_name/` via a docker volume. Browser screenshots are also used as a way of logging behavior.
