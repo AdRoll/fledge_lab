@@ -9,13 +9,23 @@
 
     <body>
         <h3 id="text"></h3>
-
-        <img
-            class="pixel"
-            src="https://dsp/arapi-register?type=event1"
-            height="1"
-            width="1"
-        />
     </body>
 
 </html>
+
+<script>
+    // dynamic ad created to ease tests. The name of the IG will be shown on the page.
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventType = urlParams.get('type') == null ? 'add-to-cart' : urlParams.get('type');
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById('text').innerText = eventType;
+
+        const img = document.createElement('img');
+        img.src = `https://dsp/arapi-register?type=${eventType}`;
+        img.height = 1;
+        img.width = 1;
+        document.body.appendChild(img);
+    });
+</script>
