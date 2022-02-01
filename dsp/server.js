@@ -3,6 +3,7 @@ const express = require('express');
 const https = require('https');
 
 const app = express();
+app.use(express.json());  // for POST request (ARAPI report)
 const port = process.env.PORT;
 const key = process.env.KEY;
 const cert = process.env.CERT;
@@ -15,6 +16,9 @@ const arapiEvents = {
   'default': 4,
   // ... we have up to 3 bits
 };
+let arapiReportCounter = 0;
+fs.mkdirSync('/opt/output/arapi_reports_repo', { recursive: true });
+
 
 const server = https.createServer({
     key: fs.readFileSync(key, 'utf8'),
@@ -28,6 +32,13 @@ app.get('/arapi-register', (req, res) => {
     302,
     `https://dsp/.well-known/attribution-reporting/trigger-attribution?trigger-data=${triggerData}`
   );
+});
+
+app.post('/.well-known/attribution-reporting/report-attribution', (req, res) => {
+  let reportFilename = `/opt/output/arapi_reports_repo/${arapiReportCounter++}.json`;
+  fs.writeFile(reportFilename, JSON.stringify(req.body), (err) => {
+    if (err) {  console.error(err);  return; };
+  });
 });
 
 app.get('/:name', (req, res) => {

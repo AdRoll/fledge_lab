@@ -30,6 +30,7 @@ python test_interest_group_amount.py --n-IGs 10 --n-samples-before-maintenance 3
 python denial_of_service.py --n-total 10 --n-samples 8 --n-dsp 1
 
 python arapi_click.py
+python arapi_conversion.py
 
 
 # remain idle (useful for using VNC)

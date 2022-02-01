@@ -32,6 +32,8 @@ services:
       context: dsp/
     ports:
       - "127.0.0.1:3003:443"
+    volumes:
+      - ./output:/opt/output
     networks:
       default:
         aliases: [dsp0, dsp1, dsp2, dsp3, dsp4, dsp5, dsp6, dsp7, dsp8, dsp9, dsp10,

@@ -170,6 +170,13 @@ python denial_of_service.py --n-total 200 --n-samples 200 --n-dsp 1
 
 This script tests that the Attribution Reporting API (ARAPI, previously known as Conversion Measurement API or CMAPI) works. It does so by visiting an ARAPI-enabled ad, clicking on it and taking a screenshot of the browser's conversion internals.
 
+#### *arapi_conversion*
+
+This script tests ARAPI conversions. It does so by visiting an ARAPI-enabled ad, clicking on it and and then going forward with two actions: _add-to-cart_ and _checkout_. Finally, it forces the browser to send the reports to the DSP, which are then saved under _output/arapi_reports_dir_. It provides with a simple minimal example of ARAPI usage. For now, it only supports event-level reporting.
+
+TODO: add aggregate-level reporting (must check first if it is available)
+
+
 ### Logging
 
 Every script uses or at least should use logging. The standard Python logger is used without too many bells and whistles. If the pattern of the current scripts is used, the outputs will be saved to `output/my_script_name/` via a docker volume. Browser screenshots are also used as a way of logging behavior.
