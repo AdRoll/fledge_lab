@@ -7,12 +7,28 @@ const port = process.env.PORT;
 const key = process.env.KEY;
 const cert = process.env.CERT;
 
+const arapiEvents = {
+  'add-to-cart': 0,
+  'event1': 1,
+  // ... we have up to 3 bits
+};
+
 const server = https.createServer({
     key: fs.readFileSync(key, 'utf8'),
     cert: fs.readFileSync(cert, 'utf8')
   }, app);
 
 // routes
+app.get('/arapi-register', (req, res) => {
+  console.log('arapi conversion');
+  const triggerData = arapiEvents[req.query['type']];
+  console.log(triggerData);
+  res.redirect(
+    302,
+    `https://dsp/.well-known/attribution-reporting/trigger-attribution?trigger-data=${triggerData}`
+  );
+});
+
 app.get('/:name', (req, res) => {
   res.header('X-Allow-FLEDGE', 'true');
   res.header('supports-loading-mode', 'fenced-frame');
