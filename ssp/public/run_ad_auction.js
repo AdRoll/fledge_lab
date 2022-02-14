@@ -3,7 +3,7 @@
 const auctionConfig = {
     seller: 'https://ssp',  // throws error if not https; does not throw error if URL does not exist (e.g. https://xsp) but does kill the auction
     decisionLogicUrl: 'https://ssp/decision_logic.js',
-    interestGroupBuyers: [...Array(64).keys()].map(x => `https://dsp${x}`).concat('https://dsp'),  // add all DSPs
+    interestGroupBuyers: [...Array(256).keys()].map(x => `https://dsp${x}`).concat('https://dsp'),  // add all DSPs
     auctionSignals: { auction_signals: 'auction_signals' },
     sellerSignals: { seller_signals: 'seller_signals' },
     perBuyerSignals: {  // throws error if not https; does not throw error if URL does not exist (e.g. https://xsp) but does kill the auction

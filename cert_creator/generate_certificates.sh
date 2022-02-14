@@ -1,11 +1,29 @@
 #!/bin/bash
 
+# TODO: see if there is a way to do this with wildcards instead of this monstrosity
+# use this to generate a portion of the dsp-related names: ' '.join([f"dsp{i}" for i in range(256)])
+
 mkcert -install
 mkcert -key-file /certs/key.pem -cert-file /certs/cert.pem localhost 127.0.0.1 ::1 \
-    advertiser ssp dsp dsp0 dsp1 dsp2 dsp3 dsp4 dsp5 dsp6 dsp7 dsp8 dsp9 dsp10  \
-    dsp11 dsp12 dsp13 dsp14 dsp15 dsp16 dsp17 dsp18 dsp19 dsp20 dsp21 dsp22 dsp23 \
-    dsp24 dsp25 dsp26 dsp27 dsp28 dsp29 dsp30 dsp31 dsp32 dsp33 dsp34 dsp35 dsp36 \
-    dsp37 dsp38 dsp39 dsp40 dsp41 dsp42 dsp43 dsp44 dsp45 dsp46 dsp47 dsp48 dsp49 \
-    dsp50 dsp51 dsp52 dsp53 dsp54 dsp55 dsp56 dsp57 dsp58 dsp59 dsp60 dsp61 dsp62 \
-    dsp63 publisher
+    advertiser ssp publisher dsp dsp0 dsp1 dsp2 dsp3 dsp4 dsp5 dsp6 dsp7 dsp8 dsp9 dsp10 \
+    dsp11 dsp12 dsp13 dsp14 dsp15 dsp16 dsp17 dsp18 dsp19 dsp20 dsp21 dsp22 dsp23 dsp24 \
+    dsp25 dsp26 dsp27 dsp28 dsp29 dsp30 dsp31 dsp32 dsp33 dsp34 dsp35 dsp36 dsp37 dsp38 \
+    dsp39 dsp40 dsp41 dsp42 dsp43 dsp44 dsp45 dsp46 dsp47 dsp48 dsp49 dsp50 dsp51 dsp52 \
+    dsp53 dsp54 dsp55 dsp56 dsp57 dsp58 dsp59 dsp60 dsp61 dsp62 dsp63 dsp64 dsp65 dsp66 \
+    dsp67 dsp68 dsp69 dsp70 dsp71 dsp72 dsp73 dsp74 dsp75 dsp76 dsp77 dsp78 dsp79 dsp80 \
+    dsp81 dsp82 dsp83 dsp84 dsp85 dsp86 dsp87 dsp88 dsp89 dsp90 dsp91 dsp92 dsp93 dsp94 \
+    dsp95 dsp96 dsp97 dsp98 dsp99 dsp100 dsp101 dsp102 dsp103 dsp104 dsp105 dsp106 dsp107 \
+    dsp108 dsp109 dsp110 dsp111 dsp112 dsp113 dsp114 dsp115 dsp116 dsp117 dsp118 dsp119 \
+    dsp120 dsp121 dsp122 dsp123 dsp124 dsp125 dsp126 dsp127 dsp128 dsp129 dsp130 dsp131 \
+    dsp132 dsp133 dsp134 dsp135 dsp136 dsp137 dsp138 dsp139 dsp140 dsp141 dsp142 dsp143 \
+    dsp144 dsp145 dsp146 dsp147 dsp148 dsp149 dsp150 dsp151 dsp152 dsp153 dsp154 dsp155 \
+    dsp156 dsp157 dsp158 dsp159 dsp160 dsp161 dsp162 dsp163 dsp164 dsp165 dsp166 dsp167 \
+    dsp168 dsp169 dsp170 dsp171 dsp172 dsp173 dsp174 dsp175 dsp176 dsp177 dsp178 dsp179 \
+    dsp180 dsp181 dsp182 dsp183 dsp184 dsp185 dsp186 dsp187 dsp188 dsp189 dsp190 dsp191 \
+    dsp192 dsp193 dsp194 dsp195 dsp196 dsp197 dsp198 dsp199 dsp200 dsp201 dsp202 dsp203 \
+    dsp204 dsp205 dsp206 dsp207 dsp208 dsp209 dsp210 dsp211 dsp212 dsp213 dsp214 dsp215 \
+    dsp216 dsp217 dsp218 dsp219 dsp220 dsp221 dsp222 dsp223 dsp224 dsp225 dsp226 dsp227 \
+    dsp228 dsp229 dsp230 dsp231 dsp232 dsp233 dsp234 dsp235 dsp236 dsp237 dsp238 dsp239 \
+    dsp240 dsp241 dsp242 dsp243 dsp244 dsp245 dsp246 dsp247 dsp248 dsp249 dsp250 dsp251 \
+    dsp252 dsp253 dsp254 dsp255
 rm certs/rootCA-key.pem  #  delete the CA's private key

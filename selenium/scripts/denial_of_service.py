@@ -10,8 +10,6 @@ import pandas as pd
 import seaborn as sns
 import statsmodels.api as sm
 
-N_DSP = 2
-
 random.seed(1)
 
 
@@ -23,7 +21,7 @@ def get_dsp_to_use(i: int, out_of: int) -> str:
 
     Args:
         i (int): number of IG to join (coming from a range).
-        out_f (int): number of DSPs to use (max 64).
+        out_f (int): number of DSPs to use (max 256).
 
     Returns:
         str: URL param to pass as dsp.
@@ -38,10 +36,10 @@ parser.add_argument('--n-total', dest='n_total', type=int, default=100,
 parser.add_argument('--n-samples', dest='n_samples', type=int, default=20,
                     help='Number of samples to collect (on top of the base case with no malicious bidder)')
 parser.add_argument('--n-dsp', dest='n_dsp', type=int, default=1,
-                    help='How many DSPs (buyers) to use (1 to 20)')
+                    help='How many DSPs (buyers) to use (1 to 256)')
 args = parser.parse_args()
 assert args.n_total >= 2 and args.n_samples >= 8  # at least 8 samples needed for the regression module to work
-assert 1 <= args.n_dsp <= 64
+assert 1 <= args.n_dsp <= 256
 
 
 output_path = utils.prepare_output_path(__file__, suffix=f"{args.n_total}_{args.n_samples}_{args.n_dsp}")

@@ -164,6 +164,15 @@ python denial_of_service.py --n-total 200 --n-samples 200 --n-dsp 8
 python denial_of_service.py --n-total 200 --n-samples 200 --n-dsp 4
 python denial_of_service.py --n-total 200 --n-samples 200 --n-dsp 2
 python denial_of_service.py --n-total 200 --n-samples 200 --n-dsp 1
+
+python denial_of_service.py --n-total 2 --n-samples 200 --n-dsp 2
+python denial_of_service.py --n-total 4 --n-samples 200 --n-dsp 4
+python denial_of_service.py --n-total 8 --n-samples 200 --n-dsp 8
+python denial_of_service.py --n-total 16 --n-samples 200 --n-dsp 16
+python denial_of_service.py --n-total 32 --n-samples 200 --n-dsp 32
+python denial_of_service.py --n-total 64 --n-samples 200 --n-dsp 64
+python denial_of_service.py --n-total 128 --n-samples 200 --n-dsp 128
+python denial_of_service.py --n-total 256 --n-samples 200 --n-dsp 256
 ```
 
 #### *arapi_click*
