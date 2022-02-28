@@ -2,7 +2,7 @@ FROM debian:buster-20211201-slim
 
 # Install required tools or dependencies for mkcert
 RUN apt update && \
-    apt install -y libnss3-tools wget
+    apt install --no-install-recommends -y libnss3-tools wget ca-certificates
 
 # Install local certificate creator for HTTPS (mkcert)
 RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 && \

@@ -5,8 +5,8 @@ use wasm_bindgen::prelude::*;
 // JS's definition of the number type:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#number_type
 #[wasm_bindgen]
-pub fn bid(bid: i32) -> f64 {
-    bid.into()
+pub fn bid(bid: f64) -> f64 {
+    bid
 }
 
 #[wasm_bindgen]

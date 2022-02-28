@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:," />
+    <title>Advertiser</title>
+  </head>
 
-    <head>
-        <meta charset="UTF-8">
-        <link rel="icon" href="data:,">
-        <title>Advertiser</title>
-    </head>
+  <body>
+    <h2>This page joins an interest group with dynamic parameters:</h2>
+    <ul id="param-list"></ul>
 
-    <body>
-        <h2>This page joins an interest group with dynamic parameters:</h2>
-        <ul id="param-list"></ul>
-
-        <iframe id="frame" width="1" height="1" src="" style="border:none;"></iframe>
-    </body>
-
+    <iframe
+      id="frame"
+      width="1"
+      height="1"
+      src=""
+      style="border: none"
+    ></iframe>
+  </body>
 </html>
 
 <script>
-    const urlParams = new URLSearchParams(window.location.search);
+  const urlParams = new URLSearchParams(window.location.search);
 
-    document.addEventListener('DOMContentLoaded', function () {
-        let paramList = document.getElementById('param-list')
+  document.addEventListener("DOMContentLoaded", function () {
+    let paramList = document.getElementById("param-list");
 
-        // loop through URL parameters to add them to the list shown to the visitor (useful for debugging)
-        urlParams.forEach(function(value, key) {
-            let li = document.createElement('li');
-            li.appendChild(document.createTextNode(key + ': ' + value));
-            paramList.appendChild(li);
-        });
-
-        // use a custom dsp hostname if it was passed (e.g. dsp2)
-        const dspParam = urlParams.get('dsp');
-        const dspHostname = dspParam == null ? 'dsp' : dspParam;
-
-        // go fetch the actual page from the DSP (given the IG owner is DSP) that will join the IG
-        let iframeSrc = `https://${dspHostname}/dynamic-interest-group?` + urlParams;
-        document.getElementById('frame').src = encodeURI(iframeSrc);
+    // loop through URL parameters to add them to the list shown to the visitor (useful for debugging)
+    urlParams.forEach(function (value, key) {
+      let li = document.createElement("li");
+      li.appendChild(document.createTextNode(key + ": " + value));
+      paramList.appendChild(li);
     });
 
+    // use a custom dsp hostname if it was passed (e.g. dsp2)
+    const dspParam = urlParams.get("dsp");
+    const dspHostname = dspParam == null ? "dsp" : dspParam;
+
+    // go fetch the actual page from the DSP (given the IG owner is DSP) that will join the IG
+    let iframeSrc =
+      `https://${dspHostname}/dynamic-interest-group?` + urlParams;
+    document.getElementById("frame").src = encodeURI(iframeSrc);
+  });
 </script>

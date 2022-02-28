@@ -1,8 +1,9 @@
 import os
 from typing import List
-from selenium import webdriver
+
 import pandas as pd
 import seaborn as sns
+from selenium import webdriver
 
 OUTPUT_DIR = '/opt/output'
 LOGGING_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'

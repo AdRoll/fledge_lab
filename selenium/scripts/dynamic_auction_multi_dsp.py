@@ -9,7 +9,7 @@ logging.basicConfig(filename=os.path.join(output_path, 'log'), filemode='w',
                     level=logging.DEBUG, format=utils.LOGGING_FORMAT)
 
 
-for i in range(64):
+for i in range(256):
     browser = utils.get_browser()
     browser.get('https://advertiser/dynamic?name=ig-1&bid=1')
     browser.get(f"https://advertiser/dynamic?name=dsp{i}&bid=100&dsp=dsp{i}")  # should always win if custom DSP worked

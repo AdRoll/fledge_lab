@@ -1,20 +1,36 @@
 function log(label, o) {
-    console.log(label, JSON.stringify(o, " ", " "))
+  console.log(label, JSON.stringify(o, " ", " "));
 }
 
-function generateBid(interestGroup, auctionSignals, perBuyerSignals, trustedBiddingSignals, browserSignals) {
-    log("generateBid", { interestGroup, auctionSignals, perBuyerSignals, trustedBiddingSignals, browserSignals })
+function generateBid(
+  interestGroup,
+  auctionSignals,
+  perBuyerSignals,
+  trustedBiddingSignals,
+  browserSignals
+) {
+  log("generateBid", {
+    interestGroup,
+    auctionSignals,
+    perBuyerSignals,
+    trustedBiddingSignals,
+    browserSignals,
+  });
 
-    while (true) {}
-
-    return {
-        ad: "ad-metadata",
-        bid: 1,
-        render: interestGroup.ads[0].renderUrl
-    }
+  while (true) {}
 }
 
-function reportWin(auctionSignals, perBuyerSignals, sellerSignals, browserSignals) {
-    log("reportWin", { auctionSignals, perBuyerSignals, sellerSignals, browserSignals })
-    sendReportTo(browserSignals.interestGroupOwner + "/reporting?report=win")
+function reportWin(
+  auctionSignals,
+  perBuyerSignals,
+  sellerSignals,
+  browserSignals
+) {
+  log("reportWin", {
+    auctionSignals,
+    perBuyerSignals,
+    sellerSignals,
+    browserSignals,
+  });
+  sendReportTo(browserSignals.interestGroupOwner + "/reporting?report=win");
 }

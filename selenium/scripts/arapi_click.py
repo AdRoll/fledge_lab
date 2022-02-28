@@ -1,6 +1,6 @@
-import time
-import os
 import logging
+import os
+import time
 import utils
 
 from selenium.webdriver.common.by import By
