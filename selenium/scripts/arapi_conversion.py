@@ -1,6 +1,6 @@
-import time
-import os
 import logging
+import os
+import time
 import utils
 
 from selenium.webdriver.common.by import By
@@ -33,13 +33,13 @@ logging.info('add to cart')
 time.sleep(1)
 
 browser.get('https://advertiser/arapi-event?type=checkout')
-logging.info('add to cart')
+logging.info('checkout')
 time.sleep(1)
 
 browser.get('chrome://conversion-internals/')
-logging.info('dashboard after click and conversions')
+logging.info('dashboard after events')
 time.sleep(3)
-browser.save_screenshot(os.path.join(output_path, 'dashboard_after_click_and_conversions.png'))
+browser.save_screenshot(os.path.join(output_path, 'dashboard_after_events.png'))
 
 # we force the browser to send the reports instead of waiting for the scheduled time
 checkboxes = browser.find_element(By.XPATH, "//input[@type='checkbox']")

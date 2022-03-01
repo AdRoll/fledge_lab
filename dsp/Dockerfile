@@ -2,7 +2,7 @@ FROM node:17.1.0-buster-slim
 
 # Install required tools or dependencies for mkcert
 RUN apt update && \
-    apt install -y libnss3-tools wget curl build-essential
+    apt install --no-install-recommends -y libnss3-tools wget curl build-essential ca-certificates
 
 # Install local certificate creator for HTTPS (mkcert)
 RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 && \
@@ -44,17 +44,10 @@ RUN cd bidding-logic-wasm && \
 COPY server.js .
 COPY public/ public/.
 
-# Create the bidding logic (JS with embedded WASM) file. This is because the worklets
-# do not support the typical method of WASM consumption (async loading), see:
-# https://github.com/WICG/turtledove/issues/224#issuecomment-926043640
-# it takes the WASM binary, converts it into a JS Uint8Array and then prepends
-# this file to the actual JS bidding file that will use it
-# TODO: explore less hacky ways of doing this once we actually get WASM to work
 COPY wasm2string.js .
-RUN node wasm2string.js bidding_logic_wasm_bg.wasm bidding_logic_wasm.bytes && \
-    cat bidding_logic_wasm.bytes public/bidding_logic_wasm.js >> combined.js && \
-    mv combined.js public/bidding_logic_wasm.js
+COPY run.sh .
+RUN chmod +x run.sh
 
 ENV CERT=./cert.pem
 ENV KEY=./key.pem
-CMD ["node", "server.js"]
+CMD ["./run.sh"]

@@ -1,6 +1,6 @@
 // this file converts a binary file into an array of its bytes in text format
 // usage: node wasm2string.js input_bin.wasm output_uint8array.js
-const fs = require('fs');
+const fs = require("fs");
 
 const myArgs = process.argv.slice(2);
 

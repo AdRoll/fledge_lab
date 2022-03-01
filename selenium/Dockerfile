@@ -2,7 +2,7 @@ FROM python:3.9.9-slim-buster
 
 # Install required tools or dependencies for mkcert
 RUN apt update && \
-    apt install -y libnss3-tools wget unzip
+    apt install --no-install-recommends -y libnss3-tools wget unzip ca-certificates
 
 # Install local certificate creator for HTTPS (mkcert)
 RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 && \
@@ -24,7 +24,7 @@ RUN apt install -y tigervnc-standalone-server xorg && \
 ENV DISPLAY=:0
 
 # Install Chromium dependencies
-RUN apt install -y gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 \
+RUN apt install --no-install-recommends -y gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 \
                     libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 \
                     libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 \
                     libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates \
@@ -43,7 +43,7 @@ RUN wget http://commondatastorage.googleapis.com/chromium-browser-snapshots/Linu
     mv chromedriver_linux64/chromedriver /usr/local/bin && \
     rm chromedriver_linux64.zip
 
-RUN apt install -y tesseract-ocr
+RUN apt install --no-install-recommends -y tesseract-ocr
 RUN pip install selenium==4.1.0 pillow==8.4.0 pytesseract==0.3.8 pandas==1.3.5 seaborn==0.11.2 statsmodels==0.13.1
 
 RUN mkdir output && \

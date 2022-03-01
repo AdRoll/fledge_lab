@@ -1,47 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <link rel="icon" href="data:," />
+    <!-- suppress favicon fetch -->
+  </head>
 
-    <head>
-        <link rel="icon" href="data:,">  <!-- suppress favicon fetch -->
-    </head>
-
-    <body>
-        <a id="ad">
-            <h3>Dynamic Ad: <span id="text"></span></h3>
-        </a>
-    </body>
-
+  <body>
+    <a id="ad">
+      <h3>Dynamic Ad: <span id="text"></span></h3>
+    </a>
+  </body>
 </html>
 
 <!-- attributionsourceeventid is a 64 bit unsigned integer, represented as a string -->
 <!-- attributionexpiry is in milliseconds and must be between 2 and 30 days -->
 
 <script>
-    // dynamic ad created to ease tests. The name of the IG will be shown on the page.
-    const urlParams = new URLSearchParams(window.location.search);
-    const text = urlParams.get('text') == null ? 'placeholder' : urlParams.get('text');;
-    const href = urlParams.get('href') == null ? 'https://advertiser' : urlParams.get('href');
-    const attributiondestination = urlParams.get('attributiondestination') == null ? 'https://advertiser' : urlParams.get('attributiondestination');
-    const attributionreportto = urlParams.get('attributionreportto') == null ? 'https://dsp' : urlParams.get('attributionreportto');
-    const attributionsourceeventid = urlParams.get('attributionsourceeventid') == null ? '1010' : urlParams.get('attributionsourceeventid');
-    const attributionexpiry = urlParams.get('attributionexpiry') == null ? '864000000' : urlParams.get('attributionexpiry');
+  // dynamic ad created to ease tests. The name of the IG will be shown on the page.
+  const urlParams = new URLSearchParams(window.location.search);
+  const text =
+    urlParams.get("text") == null ? "placeholder" : urlParams.get("text");
+  const href =
+    urlParams.get("href") == null
+      ? "https://advertiser"
+      : urlParams.get("href");
+  const attributiondestination =
+    urlParams.get("attributiondestination") == null
+      ? "https://advertiser"
+      : urlParams.get("attributiondestination");
+  const attributionreportto =
+    urlParams.get("attributionreportto") == null
+      ? "https://dsp"
+      : urlParams.get("attributionreportto");
+  const attributionsourceeventid =
+    urlParams.get("attributionsourceeventid") == null
+      ? "1010"
+      : urlParams.get("attributionsourceeventid");
+  const attributionexpiry =
+    urlParams.get("attributionexpiry") == null
+      ? "864000000"
+      : urlParams.get("attributionexpiry");
 
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById('text').innerText = text;
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("text").innerText = text;
 
-        const ad = document.getElementById('ad');
+    const ad = document.getElementById("ad");
 
-        ad.innerText = text;
-        ad.setAttribute('href', href);
-        ad.setAttribute('attributiondestination', attributiondestination);
-        ad.setAttribute('attributionreportto', attributionreportto);
-        ad.setAttribute('attributionsourceeventid', attributionsourceeventid);
-        ad.setAttribute('attributionexpiry', attributionexpiry);
+    ad.innerText = text;
+    ad.setAttribute("href", href);
+    ad.setAttribute("attributiondestination", attributiondestination);
+    ad.setAttribute("attributionreportto", attributionreportto);
+    ad.setAttribute("attributionsourceeventid", attributionsourceeventid);
+    ad.setAttribute("attributionexpiry", attributionexpiry);
 
-        // this seems like a hacky workaround given that ARAPI has this dynamic
-        // way of doing things with window.open but I was losing too much time
-        // trying to get it to work so I ended up doing this instead
-        // See: https://developer.chrome.com/docs/privacy-sandbox/attribution-reporting-event-guide/#register-clicks-with-windowopen
-    });
-
+    // this seems like a hacky workaround given that ARAPI has this dynamic
+    // way of doing things with window.open but I was losing too much time
+    // trying to get it to work so I ended up doing this instead
+    // See: https://developer.chrome.com/docs/privacy-sandbox/attribution-reporting-event-guide/#register-clicks-with-windowopen
+  });
 </script>

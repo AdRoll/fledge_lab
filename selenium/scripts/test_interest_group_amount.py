@@ -1,8 +1,9 @@
-import time
-import os
-import logging
 import argparse
+import logging
+import os
+import time
 import utils
+
 from PIL import Image
 import pytesseract
 

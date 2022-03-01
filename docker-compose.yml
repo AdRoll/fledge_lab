@@ -65,21 +65,15 @@ services:
     build:
       context: selenium/
       args:
-        - CHROMIUM_REVISION=961137  # 99.0.4841.0 2022-01-19 - WASM was enabled
+        - CHROMIUM_REVISION=961137 # 99.0.4841.0 2022-01-19 - WASM was enabled
         # - CHROMIUM_REVISION=956493  # 99.0.4813.0 2022-01-07
-        # - CHROMIUM_REVISION=953895  # 99.0.4785.0 2021-12-23
-        # - CHROMIUM_REVISION=953180  # 99.0.4780.0  2021-12-21
-        # - CHROMIUM_REVISION=951455  # 99.0.4766.0  2021-12-14
-        # - CHROMIUM_REVISION=942350  # 98.0.4710.0  2021-11-17
-        # - CHROMIUM_REVISION=938248  # 97.0.4692.0  2021-11-04
-        # - CHROMIUM_REVISION=929514  # 96.0.4664.0  2021-10-08
     depends_on:
       - advertiser
       - dsp
       - ssp
       - publisher
     ports:
-      - "127.0.0.1:5900:5900"  # for VNC access
+      - "127.0.0.1:5900:5900" # for VNC access
     environment:
       - FLEDGE_FLAGS=--enable-features=InterestGroupStorage,AdInterestGroupAPI,Fledge,FencedFrames
       - ARAPI_FLAGS=--flag-switches-begin --enable-experimental-web-platform-features --flag-switches-end

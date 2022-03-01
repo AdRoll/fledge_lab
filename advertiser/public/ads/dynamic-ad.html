@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
-    <body>
-        <h3>Dynamic Ad: <span id="name"></span></h3>
-    </body>
-
+  <body>
+    <h3>Dynamic Ad: <span id="name"></span></h3>
+  </body>
 </html>
 
 <script>
-    // dynamic ad created to ease tests. The name of the IG will be shown on the page.
-    const urlParams = new URLSearchParams(window.location.search);
-    const name = urlParams.get('name');
+  // dynamic ad created to ease tests. The name of the IG will be shown on the page.
+  // the name shown on the page is often used for the tests themselves so it must be present
+  // unless the tests themselves are changed
+  const urlParams = new URLSearchParams(window.location.search);
+  const name = urlParams.get("name");
 
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById('name').innerText = name;
-    });
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("name").innerText = name;
+  });
 </script>

@@ -1,10 +1,11 @@
-from PIL import Image
-import pytesseract
-import time
+import logging
 import math
 import os
-import logging
+import time
 import utils
+
+from PIL import Image
+import pytesseract
 
 
 output_path = utils.prepare_output_path(__file__)

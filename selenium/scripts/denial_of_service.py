@@ -1,12 +1,13 @@
-import time
-import os
+import argparse
 import logging
+import os
+import random
+import time
 import utils
+
+import pandas as pd
 from PIL import Image
 import pytesseract
-import random
-import argparse
-import pandas as pd
 import seaborn as sns
 import statsmodels.api as sm
 
@@ -80,7 +81,7 @@ for n_malicious in MALICIOUS_COUNTS:
     # to check for that we take a screenshot every 100ms and check if a normal IG (containing text "success")
     # is visible on the page, if so, we record the time and end the run. There is a maximum of 300 attempts.
     start_time = time.time()
-    for screenshot_i in range(300):
+    for _ in range(300):
         time.sleep(0.1)
 
         browser.save_screenshot(PUBLISHER_SCREENSHOT_FILENAME)
