@@ -61,12 +61,11 @@ services:
           dsp228, dsp229, dsp230, dsp231, dsp232, dsp233, dsp234, dsp235, dsp236, dsp237, dsp238,
           dsp239, dsp240, dsp241, dsp242, dsp243, dsp244, dsp245, dsp246, dsp247, dsp248, dsp249,
           dsp250, dsp251, dsp252, dsp253, dsp254, dsp255]
-  selenium:
+  client:
     build:
-      context: selenium/
+      context: client/
       args:
-        - CHROMIUM_REVISION=961137 # 99.0.4841.0 2022-01-19 - WASM was enabled
-        # - CHROMIUM_REVISION=956493  # 99.0.4813.0 2022-01-07
+        - CHROMIUM_REVISION=981146
     depends_on:
       - advertiser
       - dsp
@@ -79,4 +78,4 @@ services:
       - ARAPI_FLAGS=--flag-switches-begin --enable-experimental-web-platform-features --flag-switches-end
     volumes:
       - ./output:/opt/output
-      - ./selenium/scripts:/opt/scripts
+      - ./client/scripts:/opt/scripts

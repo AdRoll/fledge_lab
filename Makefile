@@ -3,12 +3,17 @@ create-certs:
 	docker build -t cert_creator cert_creator/. && docker run --rm -v ${PWD}/certificates:/certs cert_creator
 	cp -a certificates/{cert.pem,key.pem} dsp/
 	cp certificates/rootCA.pem selenium/
+	cp certificates/rootCA.pem client/
 
 build:
 	docker compose build
 
 run:
 	docker compose up
+
+connect:
+	open vnc://:nextroll@localhost
+
 
 clear-certs:
 	find . -name "*.pem" -type f -delete
