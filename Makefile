@@ -17,6 +17,9 @@ connect:
 test:
 	docker exec -it $(shell docker ps -qf "name=fledge_lab-client") /opt/tests.sh
 
+enter-client:
+	docker exec -it $(shell docker ps -qf "name=fledge_lab-client") /bin/bash
+
 clear-certs:
 	find . -name "*.pem" -type f -delete
 
