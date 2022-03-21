@@ -14,7 +14,7 @@ The project is made up of 6 containers managed with `docker compose`:
 - **publisher**: serves pages used to trigger auctions and show the winning ad in the browser.
 - **ssp**: serves the auction logic.
 - **dsp**: serves the interest groups and the bidding logic. This container has a total of 64 extra aliases in the network so you can simulate having 256 DSPs/buyers if necessary without having to duplicate all the code and resources.
-- **selenium**: operates a browser that interacts with the other containers, both manually using a remote VNC session or automated with [selenium](https://www.selenium.dev/documentation/webdriver/) and python scripts.
+- **client**: operates a browser that interacts with the other containers, both manually using a remote VNC session or automated with [selenium](https://www.selenium.dev/documentation/webdriver/) and python scripts.
 
 There is an additional container, **cert_creator**, whose only purpose is to create the TLS certificates and the Certificate Authority (CA) for the other containers.
 
@@ -27,7 +27,7 @@ There is an additional container, **cert_creator**, whose only purpose is to cre
 
 ### Selecting Chromium Version
 
-The `docker-compose.yml` file has a `CHROMIUM_REVISION` argument for the **selenium** container. You can change this number to automatically have that specific revision of Chromium downloaded and installed along with its corresponding driver that allows _selenium_ to control the browser.
+The `docker-compose.yml` file has a `CHROMIUM_REVISION` argument for the **client** container. You can change this number to automatically have that specific revision of Chromium downloaded and installed along with its corresponding driver that allows _selenium_ to control the browser. (NOTE: For ARM architectures, fledge_lab currently only supports the latest stable version of Chromium)
 
 The **revision number is not the same as version** and it is not that simple to get a version mapping. However, one nice trick is to visit this [link](https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2FLAST_CHANGE?alt=media) to download a text file containing the latest available revision number.
 
@@ -42,15 +42,19 @@ Once you have a Chromium browser installed, you can get its version in at least 
 
 ### Running
 
-Run `make build && make run` will build and launch all the necessary containers as well as any scripts called from [selenium/run.sh](selenium/run.sh). You may end up using `make clean-output && make build && make run` often.
+Run `make build && make run` will build and launch all the necessary containers. You may end up using `make clean-output && make build && make run` often.
 
-#### Manual Run
+You can then connect to the Chromium browser in the **client** with `make connect`.
 
-If you wish to manually launch a script you can enter the **selenium** container, `cd` to `scripts` and run `python my_selenium_script.py` where the script is one of those available in [selenium/scripts/](selenium/scripts/).
+### Selenium Scripts
 
-If you wish to use the browser inside the lab as you would on your own computer, which can be useful for learning and debugging, you can [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing) into the **selenium** container using port _5900_ and password _fledgevnc_. [TigerVNC](https://github.com/TigerVNC/tigervnc/releases)'s client works well for this purpose.
+You can run all the Selenium scripts with `make test`.
 
-Once in the VNC session, you can launch a FLEDGE-enabled browser by running `./launch_browser.sh`
+#### Manually Run Selenium Scripts
+
+To manually launch a selenium script, first enter the **client** container with `make enter-client`. Then `cd` to `scripts` and run `python my_selenium_script.py` where the script is one of those available in [client/scripts/](client/scripts/).
+
+### Demo
 
 The demo below shows a simple example of a dummy shoe store where:
 
@@ -66,7 +70,7 @@ The demo below shows a simple example of a dummy shoe store where:
 
 #### Automated Run
 
-As stated above, launching the lab will run all the scripts listed inside [selenium/run.sh](selenium/run.sh). See script [selenium/scripts/auction.py](selenium/scripts/auction.py) to see how the manual example above would be automated. The same manual steps you saw above roughly translate into the following:
+See the script [selenium/scripts/auction.py](selenium/scripts/auction.py) to see how the manual example above could be automated. The same manual steps you saw above roughly translate into the following:
 
 ```python
 URLS_IMAGES = [
@@ -201,7 +205,7 @@ Run `make clear-output` to remove all logs from a previous run.
 
 ### How Do I Start?
 
-The simplest way is probably making a copy of [selenium/scripts/auction.py](selenium/scripts/auction.py) and adapting it for your own purposes and then adding `python new_script.py` to [selenium/run.sh](selenium/run.sh).
+The simplest way is probably making a copy of [client/scripts/auction.py](client/scripts/auction.py) and adapting it for your own purposes and then adding `python new_script.py` to [client/tests.sh](client/tests.sh).
 
 ### How Do I Join an Interest Group?
 
