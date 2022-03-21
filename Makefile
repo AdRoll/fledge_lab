@@ -14,6 +14,8 @@ run:
 connect:
 	open vnc://:nextroll@localhost
 
+test:
+	docker exec -it $(shell docker ps -qf "name=fledge_lab-client") /opt/tests.sh
 
 clear-certs:
 	find . -name "*.pem" -type f -delete
