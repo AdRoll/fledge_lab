@@ -4,9 +4,6 @@ ARG TARGETPLATFORM
 WORKDIR /opt
 SHELL ["/bin/bash", "-c"]
 
-# NOTE(chris): For some reason emacs makes chrome work via VNC. TODO: figure out how to get things working without emacs
-RUN apt update && \
-    apt install --no-install-recommends -y emacs
 
 # Install required tools or dependencies for mkcert
 RUN apt update && \
@@ -27,7 +24,7 @@ RUN mkcert -install
 
 
 # Install VNC
-RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y x11vnc xvfb
+RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y x11vnc xvfb libgtk-3-0
 RUN touch $HOME/.Xauthority
 # TODO: This is a hack that relies on 20 being the default for x11vnc/xvfb
 ENV DISPLAY=:20
