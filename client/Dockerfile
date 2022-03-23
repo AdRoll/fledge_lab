@@ -35,21 +35,22 @@ RUN <<EOF
   if [ $TARGETPLATFORM == 'linux/arm64' ]
   then
     apt install --no-install-recommends -y chromium-browser chromium-chromedriver
+    ln -sfn $(which chromium-browser) /usr/bin/chrome
   else
     apt install --no-install-recommends -y gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 \
                     libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 \
                     libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 \
                     libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates \
-                    fonts-liberation libappindicator1 lsb-release xdg-utils
+                    fonts-liberation libappindicator1 lsb-release xdg-utils libgbm-dev
 
     wget http://commondatastorage.googleapis.com/chromium-browser-snapshots/Linux_x64/$CHROMIUM_REVISION/chrome-linux.zip
     unzip chrome-linux.zip
-    echo "export PATH=/opt/chrome-linux:$PATH" >> /root/.bashrc
+    ln -sfn /opt/chrome-linux/chrome /usr/bin/chrome
     rm chrome-linux.zip
 
     wget http://commondatastorage.googleapis.com/chromium-browser-snapshots/Linux_x64/$CHROMIUM_REVISION/chromedriver_linux64.zip
     unzip chromedriver_linux64.zip
-    mv chromedriver_linux64/chromedriver /usr/local/bin
+    mv chromedriver_linux64/chromedriver /usr/bin/
     rm chromedriver_linux64.zip
   fi
 EOF

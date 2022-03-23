@@ -5,7 +5,7 @@
 export PATH="$PATH:/opt/chrome-linux"
 
 # print Chromium version
-chromium-browser --version
+chrome --version
 
 ##################################################
 # selenium scripts to run:

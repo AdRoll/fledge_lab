@@ -1,8 +1,9 @@
+OS=$(shell uname)
+
 create-certs:
 	mkdir -p certificates
 	docker build -t cert_creator cert_creator/. && docker run --rm -v ${PWD}/certificates:/certs cert_creator
 	cp -a certificates/{cert.pem,key.pem} dsp/
-	cp certificates/rootCA.pem selenium/
 	cp certificates/rootCA.pem client/
 
 build:
@@ -12,13 +13,17 @@ run:
 	docker compose up
 
 connect:
+ifeq ($(OS),Darwin)
 	open vnc://:nextroll@localhost
+else
+	echo "Unupported for ${OS}. You must connect to vnc://:nextroll@localhost manually."
+endif
 
 test:
-	docker exec -it $(shell docker ps -qf "name=fledge_lab-client") /opt/tests.sh
+	docker exec -it fledge_lab-client-1  /opt/tests.sh
 
 enter-client:
-	docker exec -it $(shell docker ps -qf "name=fledge_lab-client") /bin/bash
+	docker exec -it fledge_lab-client-1  /bin/bash
 
 clear-certs:
 	find . -name "*.pem" -type f -delete
