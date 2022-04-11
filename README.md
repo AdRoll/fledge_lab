@@ -140,15 +140,9 @@ This finds how much data we can use in the interest group (TL;DR: 50kb for initi
 
 Real-time feedback on whether the auction worked or not is retrieved via [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition). Maybe there is an easier way of doing this with reporting for example (yet to be explored) but OCR turned out to be a pretty easy way of doing this for now.
 
-See [this page](https://adroll.atlassian.net/wiki/spaces/EN/pages/2625536065/On+the+Limits+of+Interest+Group+Size) for more information.
-
 #### _test_interest_group_amount_
 
 This tries to find how many interest groups we can join but in doing so it also explores timeout dynamics and the consistency of auctions.
-
-See [this page](https://adroll.atlassian.net/wiki/spaces/EN/pages/2624749615/How+Many+Interest+Groups+Can+We+Join) for more information.
-
-The results for the Confluence page above were created with:
 
 ```bash
 python test_interest_group_amount.py --n-IGs 1500 --n-samples-before-maintenance 250 --n-samples-after-maintenance 250
@@ -156,15 +150,12 @@ python test_interest_group_amount.py --n-IGs 1500 --n-samples-before-maintenance
 
 #### _test_interest_group_bidding_order_
 
-This extends _test_interest_group_amount_ by exploiting the fact that, due to timeouts, the very first IG joined never wins even though it has the highest bid. We update it at the very end so it is more recent in the queue of IGs and then it wins every single time. This was to prove the LIFO nature of bidding in the current implementation (last one to join is the first one to bid). This is also discussed in the [_test_interest_group_amount_ Confluence page](https://adroll.atlassian.net/wiki/spaces/EN/pages/2624749615/How+Many+Interest+Groups+Can+We+Join).
+This extends _test_interest_group_amount_ by exploiting the fact that, due to timeouts, the very first IG joined never wins even though it has the highest bid. We update it at the very end so it is more recent in the queue of IGs and then it wins every single time. This was to prove the LIFO nature of bidding in the current implementation (last one to join is the first one to bid). 
 
 #### _denial_of_service_
 
 This script attempts to test the limits of the auction system to see what we can learn. A bidding function with an infinite loop is injected into the mix, to varying degrees (as a share of bidders) to see how the auction and system handle this stress. In a way, it is an attempt to cause a denial of service by overwhelming the system. The main goal is to observe how/if one bidder can affect others.
 
-The results are discussed [here](https://adroll.atlassian.net/wiki/spaces/EN/pages/2638413863/Computational+Constraints).
-
-The results for the Confluence page above were created with:
 
 ```bash
 python denial_of_service.py --n-total 200 --n-samples 200 --n-dsp 64
