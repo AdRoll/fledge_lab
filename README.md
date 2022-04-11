@@ -70,7 +70,7 @@ The demo below shows a simple example of a dummy shoe store where:
 
 #### Automated Run
 
-See the script [selenium/scripts/auction.py](selenium/scripts/auction.py) to see how the manual example above could be automated. The same manual steps you saw above roughly translate into the following:
+See the script [client/scripts/auction.py](client/scripts/auction.py) to see how the manual example above could be automated. The same manual steps you saw above roughly translate into the following:
 
 ```python
 URLS_IMAGES = [
@@ -150,7 +150,7 @@ python test_interest_group_amount.py --n-IGs 1500 --n-samples-before-maintenance
 
 #### _test_interest_group_bidding_order_
 
-This extends _test_interest_group_amount_ by exploiting the fact that, due to timeouts, the very first IG joined never wins even though it has the highest bid. We update it at the very end so it is more recent in the queue of IGs and then it wins every single time. This was to prove the LIFO nature of bidding in the current implementation (last one to join is the first one to bid). 
+This extends _test_interest_group_amount_ by exploiting the fact that, due to timeouts, the very first IG joined never wins even though it has the highest bid. We update it at the very end so it is more recent in the queue of IGs and then it wins every single time. This was to prove the LIFO nature of bidding in the current implementation (last one to join is the first one to bid).
 
 #### _denial_of_service_
 
