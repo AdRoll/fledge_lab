@@ -42,7 +42,7 @@ Once you have a Chromium browser installed, you can get its version in at least 
 
 ### Running
 
-Run `make build && make run` will build and launch all the necessary containers. You may end up using `make clean-output && make build && make run` often.
+Run `make build && make run` will build and launch all the necessary containers. You may end up using `make clear-output && make build && make run` often.
 
 You can then connect to the Chromium browser in the **client** with `make connect`.
 
@@ -63,7 +63,7 @@ The demo below shows a simple example of a dummy shoe store where:
 3. We visit the publisher again => the previously joined IG (bid=1) wins and its ad shows.
 4. We visit a product of the store (shoe A) => join IG that bids 100.
 5. We visit the publisher again => the previously joined IGs (bid=1,bid=100) battle it out in the auction and shoe A (bid=100) wins and its ad shows.
-6. We visit a product of the store (shoe B) => join IG that bids 100 (it's a nice shoe!).
+6. We visit a product of the store (shoe B) => join IG that bids 150 (it's a nice shoe!).
 7. We visit the publisher again => the previously joined IGs (bid=1,bid=100,bid=150) go at it and shoe B (bid=150) wins and its ad shows.
 
 ![Auction Demo](images/auction800_356_7fps.gif)
