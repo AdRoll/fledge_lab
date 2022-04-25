@@ -19,9 +19,9 @@ def get_browser(extra_args: List[str] = []):
     Returns:
         webdriver.Chrome: Chromium instance controlled with the Selenium driver.
     """
+    chrome_args_unwrapped = os.environ['CHROME_ARGS'].split(' ')
     arapi_flags_unwrapped = os.environ['ARAPI_FLAGS'].split(' ')
-    args = ['--no-sandbox', '--no-first-run', '--disable-gpu', '--disable-sync',
-            '--disable-dev-shm-usage', os.environ['FLEDGE_FLAGS']] + arapi_flags_unwrapped + extra_args
+    args = chrome_args_unwrapped + [os.environ['FLEDGE_FLAGS']] + arapi_flags_unwrapped + extra_args
     options = webdriver.ChromeOptions()
     for arg in args:
         options.add_argument(arg)

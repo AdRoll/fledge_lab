@@ -65,15 +65,16 @@ services:
     build:
       context: client/
       args:
-        - CHROMIUM_REVISION=981146
+        - CHROMIUM_REVISION=961137  # 99.0.4841.0 2022-01-19
     depends_on:
       - advertiser
       - dsp
       - ssp
       - publisher
     ports:
-      - "127.0.0.1:5900:5900" # for VNC access
+      - "127.0.0.1:5920:5920" # for VNC access
     environment:
+      - CHROME_ARGS=--no-sandbox --disable-gpu --no-first-run --disable-sync --disable-dev-shm-usage
       - FLEDGE_FLAGS=--enable-features=InterestGroupStorage,AdInterestGroupAPI,Fledge,FencedFrames
       - ARAPI_FLAGS=--flag-switches-begin --enable-experimental-web-platform-features --flag-switches-end
     volumes:

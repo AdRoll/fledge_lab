@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.3-labs
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 ARG TARGETPLATFORM
 WORKDIR /opt
 SHELL ["/bin/bash", "-c"]
@@ -22,12 +22,8 @@ ENV CAROOT=/opt
 RUN mkcert -install
 
 
-
 # Install VNC
 RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y x11vnc xvfb libgtk-3-0
-RUN touch $HOME/.Xauthority
-# TODO: This is a hack that relies on 20 being the default for x11vnc/xvfb
-ENV DISPLAY=:20
 
 # Install Chromium and Chromium Driver (for Selenium)
 ARG CHROMIUM_REVISION
@@ -69,10 +65,12 @@ RUN <<EOF
   pip install pytesseract==0.3.8 pandas==1.3.5 seaborn==0.11.2 statsmodels==0.13.1
 EOF
 
-RUN mkdir output && \
-    mkdir scripts
+RUN mkdir output
 
 COPY scripts/. scripts/
-COPY *.sh .
+COPY entrypoint.sh experiments.sh ./
 
-CMD ./vnc_server.sh
+# necessary for VNC (see entrypoint.sh)
+ENV DISPLAY=:20
+
+ENTRYPOINT ["/opt/entrypoint.sh"]
