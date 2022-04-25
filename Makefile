@@ -12,15 +12,20 @@ build:
 run:
 	docker compose up
 
-connect:
+browser:
+	docker exec fledge_lab-client-1 /bin/bash -c 'chrome $${CHROME_ARGS} $${FLEDGE_FLAGS} $${ARAPI_FLAGS}'
+
+vnc:
 ifeq ($(OS),Darwin)
-	open vnc://:nextroll@localhost
+	open vnc://:nextroll@localhost:5920
 else
-	echo "Unupported for ${OS}. You must connect to vnc://:nextroll@localhost manually."
+	echo "Unupported for ${OS}. You must connect to vnc://:nextroll@localhost:5920 manually."
 endif
 
-test:
-	docker exec -it fledge_lab-client-1  /opt/tests.sh
+connect: vnc browser
+
+experiments:
+	docker exec -it fledge_lab-client-1  /opt/experiments.sh
 
 enter-client:
 	docker exec -it fledge_lab-client-1  /bin/bash

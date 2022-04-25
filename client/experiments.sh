@@ -13,6 +13,8 @@ chrome --version
 
 cd scripts
 
+date
+
 python auction.py
 python dynamic_auction.py
 python dynamic_auction_multi_dsp.py
@@ -26,6 +28,5 @@ python denial_of_service.py --n-total 10 --n-samples 8 --n-dsp 1
 python arapi_click.py
 python arapi_conversion.py
 
-
-# remain idle (useful for using VNC)
-sleep 24h
+date
+echo "Done."

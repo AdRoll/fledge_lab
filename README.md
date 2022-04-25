@@ -44,11 +44,11 @@ Once you have a Chromium browser installed, you can get its version in at least 
 
 Run `make build && make run` will build and launch all the necessary containers. You may end up using `make clear-output && make build && make run` often.
 
-You can then connect to the Chromium browser in the **client** with `make connect`.
+You can then connect to the Chromium browser in the **client** with `make connect`. If you wish to connect using VNC but without manually opening a browser (i.e. to observe the automated runs), you can use `make vnc`.
 
 ### Selenium Scripts
 
-You can run all the Selenium scripts with `make test`.
+You can run all the Selenium scripts with `make experiments`.
 
 #### Manually Run Selenium Scripts
 
@@ -242,6 +242,7 @@ You can learn more by looking at the [relevant section](https://github.com/WICG/
 
 ## TODOs
 
+- Reintroduce WASM (removed for convenience when incorporating M1 architecture compatibility)
 - Add assertions to the scripts to make sure we do not miss any failures.
 - Explore [reporting](https://github.com/WICG/turtledove/blob/main/FLEDGE.md#5-event-level-reporting-for-now).
 
