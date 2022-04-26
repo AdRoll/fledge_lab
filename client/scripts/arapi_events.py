@@ -12,7 +12,7 @@ logging.basicConfig(filename=os.path.join(output_path, 'log'), filemode='w',
 browser = utils.get_browser()
 
 
-browser.get('chrome://conversion-internals/')
+browser.get('chrome://attribution-internals/')
 logging.info('dashboard before click')
 time.sleep(3)
 browser.save_screenshot(os.path.join(output_path, 'dashboard_before_click.png'))
@@ -36,17 +36,21 @@ browser.get('https://advertiser/arapi-event?type=checkout')
 logging.info('checkout')
 time.sleep(1)
 
-browser.get('chrome://conversion-internals/')
+browser.get('chrome://attribution-internals/')
 logging.info('dashboard after events')
 time.sleep(3)
-browser.save_screenshot(os.path.join(output_path, 'dashboard_after_events.png'))
+browser.save_screenshot(os.path.join(output_path, 'dashboard_sources_after_events.png'))
+
+# switch to the event-level reports tag
+browser.find_element(By.XPATH, "//tab[text()='Event-Level Reports']").click()
+time.sleep(2)
+browser.save_screenshot(os.path.join(output_path, 'dashboard_event_level_reports_after_events.png'))
 
 # we force the browser to send the reports instead of waiting for the scheduled time
-checkboxes = browser.find_element(By.XPATH, "//input[@type='checkbox']")
-checkboxes.click()
-send_reports_button = browser.find_element(By.ID, 'send-reports')
-send_reports_button.click()
+browser.find_element(By.XPATH, "//thead/tr/th/input[@type='checkbox']").click()
 time.sleep(1)
+send_reports_button = browser.find_element(By.ID, 'send-reports').click()
+time.sleep(2)
 
 browser.quit()
 print(f"Done: {__file__}")

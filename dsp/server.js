@@ -7,6 +7,7 @@ app.use(express.json()); // for POST request (ARAPI report)
 const port = process.env.PORT;
 const key = process.env.KEY;
 const cert = process.env.CERT;
+const ARAPI_REPORTS_REPO = '/opt/output/arapi_reports_repo';
 
 const arapiEvents = {
   "add-to-cart": 0,
@@ -17,7 +18,7 @@ const arapiEvents = {
   // ... we have up to 3 bits
 };
 let arapiReportCounter = 0;
-fs.mkdirSync("/opt/output/arapi_reports_repo", { recursive: true });
+
 
 const server = https.createServer(
   {
@@ -27,19 +28,45 @@ const server = https.createServer(
   app
 );
 
-// routes
-app.get("/arapi-register", (req, res) => {
-  const triggerData = arapiEvents[req.query["type"]];
-  res.redirect(
-    302,
-    `https://dsp/.well-known/attribution-reporting/trigger-attribution?trigger-data=${triggerData}`
-  );
-});
 
+// arapi: click on ad
+app.get('/register-source', (req, res) => {
+  res.set(
+    'Attribution-Reporting-Register-Source',
+    JSON.stringify({
+      source_event_id: '123456789123456',  // u64 as string
+      destination: 'https://advertiser',
+      expiry: '36000'  // in seconds [1 day, 30 days]
+      // can also add priority (i64 as string) and debug key (i64 as string)
+    })
+  )
+  res.status(200).send('OK')
+ });
+
+
+// arapi: attribution/conversion event
+ app.get('/arapi-register', (req, res) => {
+  const triggerData = arapiEvents[req.query["type"]];
+  res.set(
+    'Attribution-Reporting-Register-Event-Trigger',
+    JSON.stringify([
+      {
+        trigger_data: `${triggerData}`
+      }
+    ])
+  )
+  res.sendStatus(200);
+ });
+
+
+ // arapi: reports
 app.post(
-  "/.well-known/attribution-reporting/report-attribution",
+  "/.well-known/attribution-reporting/report-event-attribution",
   (req, res) => {
     let reportFilename = `/opt/output/arapi_reports_repo/${arapiReportCounter++}.json`;
+    if (!fs.existsSync(ARAPI_REPORTS_REPO)) {
+      fs.mkdirSync(ARAPI_REPORTS_REPO, { recursive: true });
+    }
     fs.writeFile(reportFilename, JSON.stringify(req.body), (err) => {
       if (err) {
         console.error(err);
@@ -48,6 +75,7 @@ app.post(
     });
   }
 );
+
 
 app.get("/:name", (req, res) => {
   res.header("X-Allow-FLEDGE", "true");

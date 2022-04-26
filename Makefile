@@ -13,7 +13,7 @@ run:
 	docker compose up
 
 browser:
-	docker exec fledge_lab-client-1 /bin/bash -c 'chrome $${CHROME_ARGS} $${FLEDGE_FLAGS} $${ARAPI_FLAGS}'
+	docker exec fledge_lab-client-1 /bin/bash -c 'chrome $${CHROME_ARGS} $${PRIVACY_SANDBOX_FLAGS}'
 
 vnc:
 ifeq ($(OS),Darwin)

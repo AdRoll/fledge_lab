@@ -2,7 +2,7 @@
 
 ---
 
-The goal of this project is to provide an easy and friendly way to gain a practical understanding of the [FLEDGE](https://github.com/WICG/turtledove/blob/main/FLEDGE.md) API and its implementation.
+The goal of this project is to provide an easy and friendly way to gain a practical understanding of the [FLEDGE](https://github.com/WICG/turtledove/blob/main/FLEDGE.md) API and its implementation. It also includes other parts of the [Privacy Sandbox](https://privacysandbox.com/) like [ARAPI](https://github.com/WICG/conversion-measurement-api) and may expand in the future.
 
 Feel free to contribute if you have any ideas or ask if you want to use it but don't know how to get started.
 
@@ -180,9 +180,9 @@ python denial_of_service.py --n-total 256 --n-samples 200 --n-dsp 256
 
 This script tests that the Attribution Reporting API (ARAPI, previously known as Conversion Measurement API or CMAPI) works. It does so by visiting an ARAPI-enabled ad, clicking on it and taking a screenshot of the browser's conversion internals.
 
-#### _arapi_conversion_
+#### _arapi_events_
 
-This script tests ARAPI conversions. It does so by visiting an ARAPI-enabled ad, clicking on it and and then going forward with two actions: _add-to-cart_ and _checkout_. Finally, it forces the browser to send the reports to the DSP, which are then saved under _output/arapi_reports_dir_. It provides with a simple minimal example of ARAPI usage. For now, it only supports event-level reporting.
+This script tests ARAPI events. It does so by visiting an ARAPI-enabled ad, clicking on it and and then going forward with two actions: _add-to-cart_ and _checkout_. Finally, it forces the browser to send the reports to the DSP, which are then saved under _output/arapi_reports_dir_. It provides with a simple minimal example of ARAPI usage. For now, it only supports event-level reporting.
 
 TODO: add aggregate-level reporting (must check first if it is available)
 
@@ -242,7 +242,8 @@ You can learn more by looking at the [relevant section](https://github.com/WICG/
 
 ## TODOs
 
-- Reintroduce WASM (removed for convenience when incorporating M1 architecture compatibility)
+- Experiment with the daily update URL.
+- Reintroduce/fix WASM (removed for convenience when incorporating M1 architecture compatibility).
 - Add assertions to the scripts to make sure we do not miss any failures.
 - Explore [reporting](https://github.com/WICG/turtledove/blob/main/FLEDGE.md#5-event-level-reporting-for-now).
 
