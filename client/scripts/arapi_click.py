@@ -12,7 +12,7 @@ logging.basicConfig(filename=os.path.join(output_path, 'log'), filemode='w',
 browser = utils.get_browser()
 
 
-browser.get('chrome://conversion-internals/')
+browser.get('chrome://attribution-internals/')
 logging.info('dashboard before click')
 time.sleep(3)
 browser.save_screenshot(os.path.join(output_path, 'dashboard_before_click.png'))
@@ -28,7 +28,7 @@ logging.info('clicked on ad')
 time.sleep(1)
 browser.save_screenshot(os.path.join(output_path, 'after_click.png'))
 
-browser.get('chrome://conversion-internals/')
+browser.get('chrome://attribution-internals/')
 logging.info('dashboard after click')
 time.sleep(3)
 browser.save_screenshot(os.path.join(output_path, 'dashboard_after_click.png'))

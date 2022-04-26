@@ -65,7 +65,8 @@ services:
     build:
       context: client/
       args:
-        - CHROMIUM_REVISION=961137  # 99.0.4841.0 2022-01-19
+        # - CHROMIUM_REVISION=993199  # Chromium 103.0.5009.0 2022-04-17, fenced frame is displayed correctly but ad no longer renders... TODO: fix/find out why
+        - CHROMIUM_REVISION=992118  # 102.0.5003.0 2022-04-13
     depends_on:
       - advertiser
       - dsp
@@ -75,8 +76,8 @@ services:
       - "127.0.0.1:5920:5920" # for VNC access
     environment:
       - CHROME_ARGS=--no-sandbox --disable-gpu --no-first-run --disable-sync --disable-dev-shm-usage
-      - FLEDGE_FLAGS=--enable-features=InterestGroupStorage,AdInterestGroupAPI,Fledge,FencedFrames
-      - ARAPI_FLAGS=--flag-switches-begin --enable-experimental-web-platform-features --flag-switches-end
+      # see: https://chromium-review.googlesource.com/c/chromium/src/+/3558276/6/chrome/browser/about_flags.cc#7134
+      - PRIVACY_SANDBOX_FLAGS=--enable-features=FencedFrames,PrivacySandboxAdsAPIsOverride,InterestGroupStorage,Fledge,AllowURNsInIframes,BrowsingTopics,ConversionMeasurement,OverridePrivacySandboxSettingsLocalTesting
     volumes:
       - ./output:/opt/output
       - ./client/scripts:/opt/scripts

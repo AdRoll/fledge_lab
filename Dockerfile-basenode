@@ -18,7 +18,7 @@ ENV CAROOT=/opt
 RUN mkcert -install
 
 # Install npm dependencies
-RUN npm install express
+RUN npm install express@4.18.0
 
 ARG SERVER_LOCATION
 COPY $SERVER_LOCATION/server.js .
