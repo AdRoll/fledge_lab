@@ -23,7 +23,8 @@ RUN mkcert -install
 
 
 # Install VNC
-RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y x11vnc xvfb libgtk-3-0
+RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y x11vnc xvfb libgtk-3-0 && \
+    touch $HOME/.Xauthority
 
 # Install Chromium and Chromium Driver (for Selenium)
 ARG CHROMIUM_REVISION
