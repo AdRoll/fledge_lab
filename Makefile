@@ -1,10 +1,9 @@
 OS=$(shell uname)
 
-create-certs:
-	mkdir -p certificates
-	docker build -t cert_creator cert_creator/. && docker run --rm -v ${PWD}/certificates:/certs cert_creator
-	cp -a certificates/{cert.pem,key.pem} dsp/
-	cp certificates/rootCA.pem client/
+create-certs: clear-certs
+	docker build --output type=local,dest=certificates ./cert_creator
+	cp ./certificates/cert.pem ./certificates/key.pem dsp/
+	cp ./certificates/rootCA.pem client/
 
 build:
 	docker compose build
