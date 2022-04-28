@@ -40,6 +40,6 @@ install-hooks:
 	pre-commit install
 
 test-auction: clear-output
-	docker exec -it -w /opt/scripts fledge_lab-client-1 python auction.py
-	docker exec -it -w /opt/output/auction fledge_lab-client-1 grep -i "Nothing" publisher_before_join.png.txt
-	docker exec -it -w /opt/output/auction fledge_lab-client-1 grep -i "shoe-b" publisher_after_shoe_b_join.png.txt
+	docker exec -w /opt/scripts fledge_lab-client-1 python auction.py
+	docker exec -w /opt/output/auction fledge_lab-client-1 grep -i "Nothing" publisher_before_join.png.txt
+	docker exec -w /opt/output/auction fledge_lab-client-1 grep -i "shoe-b" publisher_after_shoe_b_join.png.txt
