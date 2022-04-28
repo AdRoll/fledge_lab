@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1
-
 FROM debian:buster-20211201-slim as builder
 SHELL ["/bin/bash", "-c"]
 
@@ -12,13 +10,10 @@ RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v
     chmod +x /usr/local/bin/mkcert
 
 ENV CAROOT=/certs
-
-RUN <<EOF
-    rm -f ${CAROOT}/*.pem
-    mkcert -install
-    mkcert -key-file ${CAROOT}/key.pem -cert-file ${CAROOT}/cert.pem localhost 127.0.0.1 ::1 advertiser ssp publisher dsp dsp{0..255}
+RUN rm -f ${CAROOT}/*.pem && \
+    mkcert -install && \
+    mkcert -key-file ${CAROOT}/key.pem -cert-file ${CAROOT}/cert.pem localhost 127.0.0.1 ::1 advertiser ssp publisher dsp dsp{0..255} && \
     rm ${CAROOT}/rootCA-key.pem
-EOF
 
 FROM scratch
 COPY --from=builder /certs /
