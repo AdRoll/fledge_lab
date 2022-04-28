@@ -21,7 +21,9 @@ for url_advertiser, image_name in URLS_IMAGES:
         browser.get(url_advertiser)  # join the IG
     browser.get('https://publisher/')  # trigger auction & show winning ad
     time.sleep(0.5)  # wait a little to make sure we screenshot after completion
-    browser.save_screenshot(os.path.join(output_path, image_name))
+    image_path = os.path.join(output_path, image_name)
+    browser.save_screenshot(image_path)
+    utils.save_image_text(image_path, image_path + '.txt')
 
 browser.quit()
 print(f"Done: {__file__}")
