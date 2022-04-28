@@ -14,10 +14,10 @@ jobs:
         id: buildx
         with:
           install: true
-      - name: Install pip
+      - name: Install pip and jq
         run: |
           sudo apt update
-          sudo apt install -y --no-install-recommends python3-pip tree
+          sudo apt install -y --no-install-recommends jq python3-pip
       - name: python linting
         run: |
           pip3 install flake8
@@ -30,6 +30,8 @@ jobs:
       - name: Create TLS certificates
         run: make create-certs
       - name: Launch lab
-        run: docker compose up -d
+        run: docker compose up --build --detach
       - name: Test FLEDGE with simple auction
         run: make test-auction
+      - name: Test ARAPI events
+        run: make test-arapi

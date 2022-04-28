@@ -44,8 +44,7 @@ def prepare_output_path(filename: str, suffix: str = '') -> str:
     base_filename = os.path.splitext(base_path)[0] + suffix
     target_path = os.path.join(OUTPUT_DIR, base_filename)
 
-    if not os.path.exists(target_path):
-        os.makedirs(target_path)
+    os.makedirs(target_path, exist_ok=True)
 
     return target_path
 
