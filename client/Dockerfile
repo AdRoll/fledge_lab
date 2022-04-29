@@ -6,14 +6,13 @@ SHELL ["/bin/bash", "-c"]
 
 
 # Install required tools or dependencies for mkcert
-RUN apt update && \
-    apt install --no-install-recommends -y libnss3-tools wget curl unzip ca-certificates
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y libnss3-tools wget curl unzip ca-certificates
 
 
 # Cert stuff (TODO: Don't use arch-specific binaries??)
 RUN apt install --no-install-recommends -y libnss3-tools ca-certificates
-RUN wget --no-check-certificate https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-arm64 && \
-    mv mkcert-v1.4.3-linux-arm64 /usr/local/bin/mkcert && \
+RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -O /usr/local/bin/mkcert && \
     chmod +x /usr/local/bin/mkcert
 RUN mkdir -p $HOME/.pki/nssdb && certutil -d sql:$HOME/.pki/nssdb -N --empty-password
 RUN mkcert -install

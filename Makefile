@@ -1,10 +1,9 @@
 OS=$(shell uname)
 
-create-certs:
-	mkdir -p certificates
-	docker build -t cert_creator cert_creator/. && docker run --rm -v ${PWD}/certificates:/certs cert_creator
-	cp -a certificates/{cert.pem,key.pem} dsp/
-	cp certificates/rootCA.pem client/
+create-certs: clear-certs
+	docker build --output type=local,dest=certificates ./cert_creator
+	cp ./certificates/cert.pem ./certificates/key.pem dsp/
+	cp ./certificates/rootCA.pem client/
 
 build:
 	docker compose build
@@ -39,3 +38,12 @@ clear-output:
 install-hooks:
 	pip install --user pre-commit
 	pre-commit install
+
+test-auction:
+	docker exec -w /opt/scripts fledge_lab-client-1 python auction.py
+	docker exec -w /opt/output/auction fledge_lab-client-1 grep -i "Nothing" publisher_before_join.png.txt
+	docker exec -w /opt/output/auction fledge_lab-client-1 grep -i "shoe-b" publisher_after_shoe_b_join.png.txt
+
+test-arapi:
+	docker exec -w /opt/scripts fledge_lab-client-1 python arapi_events.py
+	docker exec -w /opt/output/arapi_reports_repo fledge_lab-client-1 cat 0.json | jq .attribution_destination | grep advertiser

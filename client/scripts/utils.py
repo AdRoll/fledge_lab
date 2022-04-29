@@ -2,6 +2,8 @@ import os
 from typing import List
 
 import pandas as pd
+from PIL import Image
+import pytesseract
 import seaborn as sns
 from selenium import webdriver
 
@@ -42,8 +44,7 @@ def prepare_output_path(filename: str, suffix: str = '') -> str:
     base_filename = os.path.splitext(base_path)[0] + suffix
     target_path = os.path.join(OUTPUT_DIR, base_filename)
 
-    if not os.path.exists(target_path):
-        os.makedirs(target_path)
+    os.makedirs(target_path, exist_ok=True)
 
     return target_path
 
@@ -78,3 +79,20 @@ def produce_before_after_maintenance_chart(path: str):
     g = sns.histplot(data=df, x='Winning Bid', hue='After Maintenance?', bins=n_diff_bids, discrete=True)
     g.set_title('Number of Winning Bids per Price, Before and After Maintenance')
     g.get_figure().savefig(os.path.join(path, '_winning_bids.png'))
+
+
+def save_image_text(image_filename: str, text_filename: str):
+    """Saves text from image file using OCR.
+
+    Args:
+        image_filename (str): filename of image to read text from.
+        text_filename (str): filename for text output.
+    """
+    try:
+        img = Image.open(image_filename)
+        page_text = pytesseract.image_to_string(img)
+    except FileNotFoundError as e:
+        page_text = e
+    finally:
+        with open(text_filename, 'w') as f:
+            f.write(page_text)
