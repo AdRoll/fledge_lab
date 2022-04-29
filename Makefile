@@ -40,12 +40,10 @@ install-hooks:
 	pre-commit install
 
 test-auction:
-	docker exec -w /opt/output fledge_lab-client-1 sudo rm -rf auction/
 	docker exec -w /opt/scripts fledge_lab-client-1 python auction.py
 	docker exec -w /opt/output/auction fledge_lab-client-1 grep -i "Nothing" publisher_before_join.png.txt
 	docker exec -w /opt/output/auction fledge_lab-client-1 grep -i "shoe-b" publisher_after_shoe_b_join.png.txt
 
 test-arapi:
-	docker exec -w /opt/output fledge_lab-client-1 sudo rm -rf arapi_reports_repo/
 	docker exec -w /opt/scripts fledge_lab-client-1 python arapi_events.py
 	docker exec -w /opt/output/arapi_reports_repo fledge_lab-client-1 cat 0.json | jq .attribution_destination | grep advertiser

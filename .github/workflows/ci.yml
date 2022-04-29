@@ -32,6 +32,10 @@ jobs:
       - name: Launch lab
         run: docker compose up --build --detach
       - name: Test FLEDGE with simple auction
-        run: make test-auction
+        run: |
+          sudo make clear-output
+          make test-auction
       - name: Test ARAPI events
-        run: make test-arapi
+        run: |
+          sudo make clear-output
+          make test-arapi
