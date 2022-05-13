@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     fencedFrameWithAd.src = result;
     fencedFrameWithAd.setAttribute("width", "400");
     fencedFrameWithAd.setAttribute("height", "100");
+    fencedFrameWithAd.setAttribute("mode", "opaque-ads");
     document.body.appendChild(fencedFrameWithAd);
   } else {
     document.body.innerText = "Nothing to show";
