@@ -46,4 +46,5 @@ test-auction:
 
 test-arapi:
 	docker exec -w /opt/scripts fledge_lab-client-1 python arapi_events.py
-	docker exec -w /opt/output/arapi_reports_repo fledge_lab-client-1 cat 0.json | jq .attribution_destination | grep advertiser
+	docker exec -w /opt/output/arapi_reports_repo fledge_lab-client-1 cat 0.json
+	docker exec -w /opt/output/arapi_reports_repo fledge_lab-client-1 cat 0.json | python -c "import json,sys; json.load(sys.stdin)['attribution_destination']=='https://advertiser' or sys.exit(1)"

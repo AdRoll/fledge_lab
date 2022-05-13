@@ -7,7 +7,7 @@ on:
 
 jobs:
   ci:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - uses: docker/setup-buildx-action@v1
@@ -17,7 +17,7 @@ jobs:
       - name: Install pip and jq
         run: |
           sudo apt update
-          sudo apt install -y --no-install-recommends jq python3-pip
+          sudo apt install -y --no-install-recommends python3-pip
       - name: python linting
         run: |
           pip3 install flake8
@@ -36,6 +36,4 @@ jobs:
           sudo make clear-output
           make test-auction
       - name: Test ARAPI events
-        run: |
-          sudo make clear-output
-          make test-arapi
+        run: make test-arapi
