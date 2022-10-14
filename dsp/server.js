@@ -8,6 +8,7 @@ const port = process.env.PORT;
 const key = process.env.KEY;
 const cert = process.env.CERT;
 const ARAPI_REPORTS_REPO = '/opt/output/arapi_reports_repo';
+const FLEDGE_REPORTS_REPO = '/opt/output/click_reports_repo';
 
 const arapiEvents = {
   "add-to-cart": 0,
@@ -66,6 +67,28 @@ app.post(
     let reportFilename = `/opt/output/arapi_reports_repo/${arapiReportCounter++}.json`;
     if (!fs.existsSync(ARAPI_REPORTS_REPO)) {
       fs.mkdirSync(ARAPI_REPORTS_REPO, { recursive: true });
+    }
+    fs.writeFile(reportFilename, JSON.stringify(req.body), (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    });
+  }
+);
+
+// fledge click report
+// NB: this currenly creates an empty file, it does not seem to write the actual request body.
+// I tried playing around with it but had no luck. I see in the browser console that eventData is
+// including in the request payload. That was good enough for me to confirm that we can send
+// the ARAPI attribution source event ID through the fledge click report.  
+app.post(
+  "/click_reports",
+  (req, res) => {
+    const buyer_event_id = req.query.buyer_event_id;
+    let reportFilename = `/opt/output/click_reports_repo/${buyer_event_id}.json`;
+    if (!fs.existsSync(FLEDGE_REPORTS_REPO)) {
+      fs.mkdirSync(FLEDGE_REPORTS_REPO, { recursive: true });
     }
     fs.writeFile(reportFilename, JSON.stringify(req.body), (err) => {
       if (err) {
