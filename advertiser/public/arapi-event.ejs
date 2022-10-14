@@ -21,7 +21,7 @@
     document.getElementById("text").innerText = eventType;
 
     const img = document.createElement("img");
-    img.src = `https://dsp/arapi-register?type=${eventType}`;
+    img.src = `https://<%= dsp_name %>/arapi-register?type=${eventType}`;
     img.height = 1;
     img.width = 1;
     document.body.appendChild(img);

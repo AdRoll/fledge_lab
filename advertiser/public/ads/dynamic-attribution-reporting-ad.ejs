@@ -23,7 +23,7 @@
       : urlParams.get("href");
   const attributionsrc =
     urlParams.get("attributionsrc") == null
-      ? "https://dsp/register-source"
+      ? "https://<%= dsp_name %>/register-source"
       : urlParams.get("attributionsrc");
 
   document.addEventListener("DOMContentLoaded", function () {

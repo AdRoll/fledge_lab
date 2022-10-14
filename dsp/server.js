@@ -3,10 +3,12 @@ const express = require("express");
 const https = require("https");
 
 const app = express();
+app.set('view engine', 'ejs');
 app.use(express.json()); // for POST request (ARAPI report)
 const port = process.env.PORT;
 const key = process.env.KEY;
 const cert = process.env.CERT;
+const dsp_name = process.env.DSP_NAME;
 const ARAPI_REPORTS_REPO = '/opt/output/arapi_reports_repo';
 
 const arapiEvents = {
@@ -83,11 +85,10 @@ app.get("/:name", (req, res) => {
 
   let ext = req.params.name.split(".").pop();
 
-  if (req.params.name == ext) {
-    // no extension
-    res.sendFile(__dirname + "/public/" + req.params.name + ".html");
-  } else {
+  if (ext == 'js') {
     res.sendFile(__dirname + "/public/" + req.params.name);
+  } else {
+    res.render(__dirname + "/public/" + req.params.name, { dsp_name: dsp_name });
   }
 });
 

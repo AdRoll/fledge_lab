@@ -10,12 +10,12 @@
 
 <script>
   const generalAdGroup = {
-    owner: "https://dsp",
+    owner: "https://<%= dsp_name %>",
     name: "general-visitor",
-    biddingLogicUrl: "https://dsp/bidding_logic.js",
-    trustedBiddingSignalsUrl: "https://dsp/bidding_signal.json",
+    biddingLogicUrl: "https://<%= dsp_name %>/bidding_logic.js",
+    trustedBiddingSignalsUrl: "https://<%= dsp_name %>/bidding_signal.json",
     trustedBiddingSignalsKeys: ["key1", "key2"],
-    dailyUpdateUrl: "https://dsp/daily_update_url",
+    dailyUpdateUrl: "https://<%= dsp_name %>/daily_update_url",
     userBiddingSignals: {
       user_bidding_signals: "user_bidding_signals",
     },
