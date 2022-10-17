@@ -10,6 +10,7 @@ services:
     environment:
       - PORT=443
       - DEBUG=express:*
+      - DSP_NAME=dsp
   publisher:
     <<: *node_base_server
     build:

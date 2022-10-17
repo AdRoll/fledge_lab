@@ -16,7 +16,7 @@ ENV CAROOT=/opt
 RUN mkcert -install
 
 # Install npm dependencies
-RUN npm install express@4.18.0
+RUN npm install express@4.18.2 ejs@3.1.8
 
 ##### Rust portion for WASM
 # TODO: add multi-stage build? Image size is not a concern for this at the moment though
