@@ -12,6 +12,10 @@
   const urlParams = new URLSearchParams(window.location.search);
   const name = urlParams.get("name");
   const bid = urlParams.get("bid");
+  const adName =
+    urlParams.get("adName") == null
+      ? 'dynamic-ad'
+      : urlParams.get("adName");
   const payloadSize = urlParams.get("payloadSize");
   const biddingLogicName = urlParams.get("biddingLogicName");
 
@@ -34,7 +38,7 @@
     },
     ads: [
       {
-        renderUrl: "https://advertiser/ads/dynamic-ad?name=" + name,
+        renderUrl: `https://advertiser/ads/${adName}?name=${name}`,
       },
     ],
   };
