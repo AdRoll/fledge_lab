@@ -46,7 +46,7 @@ app.get('/register-source', (req, res) => {
  });
 
 
- // arapi: register trigger
+ // arapi: register trigger - attribution/conversion event
  app.get('/arapi-trigger', (req, res) => {
   const triggerData = arapiEvents[req.query["type"]];
   res.header({
@@ -65,23 +65,7 @@ app.get('/register-source', (req, res) => {
   res.sendStatus(200);
  });
 
-
-// arapi: attribution/conversion event
- app.get('/arapi-register', (req, res) => {
-  const triggerData = arapiEvents[req.query["type"]];
-  res.set(
-    'Attribution-Reporting-Register-Trigger',
-    JSON.stringify([
-      {
-        trigger_data: `${triggerData}`
-      }
-    ])
-  )
-  res.sendStatus(200);
- });
-
-
- // arapi: reports
+ // arapi: reports reception endpoint
 app.post(
   "/.well-known/attribution-reporting/report-event-attribution",
   (req, res) => {
