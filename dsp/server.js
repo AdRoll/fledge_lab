@@ -49,9 +49,6 @@ app.get('/register-source', (req, res) => {
  // arapi: register trigger - attribution/conversion event
  app.get('/arapi-trigger', (req, res) => {
   const triggerData = arapiEvents[req.query["type"]];
-  res.header({
-    'Permissions-Policy': `attribution-reporting=(self "https://${dsp_name}")`
-  });
   res.set(
     'Attribution-Reporting-Register-Trigger',
     JSON.stringify(
