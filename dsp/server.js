@@ -70,7 +70,6 @@ app.get('/register-source', (req, res) => {
  app.get('/arapi-register', (req, res) => {
   const triggerData = arapiEvents[req.query["type"]];
   res.set(
-    // 'Attribution-Reporting-Register-Event-Trigger',
     'Attribution-Reporting-Register-Trigger',
     JSON.stringify([
       {
