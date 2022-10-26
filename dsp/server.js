@@ -31,7 +31,7 @@ const server = https.createServer(
 );
 
 
-// arapi: click on ad
+// arapi: register source event (e.g. ad view)
 app.get('/register-source', (req, res) => {
   res.set(
     'Attribution-Reporting-Register-Source',
@@ -46,11 +46,32 @@ app.get('/register-source', (req, res) => {
  });
 
 
+ // arapi: register trigger
+ app.get('/arapi-trigger', (req, res) => {
+  const triggerData = arapiEvents[req.query["type"]];
+  res.header({
+    'Permissions-Policy': `attribution-reporting=(self "https://${dsp_name}")`
+  });
+  res.set(
+    'Attribution-Reporting-Register-Trigger',
+    JSON.stringify(
+      {
+        event_trigger_data: [{
+          trigger_data: `${triggerData}`
+        }]
+      }
+    )
+  )
+  res.sendStatus(200);
+ });
+
+
 // arapi: attribution/conversion event
  app.get('/arapi-register', (req, res) => {
   const triggerData = arapiEvents[req.query["type"]];
   res.set(
-    'Attribution-Reporting-Register-Event-Trigger',
+    // 'Attribution-Reporting-Register-Event-Trigger',
+    'Attribution-Reporting-Register-Trigger',
     JSON.stringify([
       {
         trigger_data: `${triggerData}`
