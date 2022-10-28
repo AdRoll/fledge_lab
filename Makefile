@@ -45,7 +45,6 @@ test-auction:
 	docker exec -w /opt/output/auction fledge_lab-client-1 grep -i "shoe-b" publisher_after_shoe_b_join.png.txt
 
 test-arapi:
-	docker exec -w /opt/scripts fledge_lab-client-1 python arapi_click.py
 	docker exec -w /opt/scripts fledge_lab-client-1 python arapi_events.py
 	docker exec -w /opt/output/arapi_reports_repo fledge_lab-client-1 cat 0.json
 	docker exec -w /opt/output/arapi_reports_repo fledge_lab-client-1 cat 0.json | python -c "import json,sys; json.load(sys.stdin)['attribution_destination']=='https://advertiser' or sys.exit(1)"

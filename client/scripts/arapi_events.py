@@ -17,24 +17,16 @@ logging.info('dashboard before click')
 time.sleep(3)
 browser.save_screenshot(os.path.join(output_path, 'dashboard_before_click.png'))
 
-browser.get('https://advertiser/ads/dynamic-attribution-reporting-ad?text=test')
+browser.get('https://advertiser/ads/dynamic-arapi-ad')
 logging.info('visited ad')
 time.sleep(1)
 browser.save_screenshot(os.path.join(output_path, 'ad.png'))
 
-ad = browser.find_element(By.ID, 'ad')
+ad = browser.find_element(By.ID, 'ad-link')
 ad.click()
 logging.info('clicked on ad')
 time.sleep(1)
 browser.save_screenshot(os.path.join(output_path, 'after_click.png'))
-
-browser.get('https://advertiser/arapi-event?type=add-to-cart')
-logging.info('add to cart')
-time.sleep(1)
-
-browser.get('https://advertiser/arapi-event?type=checkout')
-logging.info('checkout')
-time.sleep(1)
 
 browser.get('chrome://attribution-internals/')
 logging.info('dashboard after events')

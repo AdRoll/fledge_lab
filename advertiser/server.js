@@ -21,11 +21,17 @@ const server = https.createServer(
 app.get("/ads/:name", (req, res) => {
   // required header to allow fenced frames, see:
   // https://github.com/WICG/nav-speculation/blob/main/opt-in.md#declaration
-  res.header("supports-loading-mode", "fenced-frame");
+  res.header({
+    'supports-loading-mode': 'fenced-frame',
+    'Permissions-Policy': `attribution-reporting=(self "https://${dsp_name}")`
+  });
   res.render(__dirname + "/public/ads/" + req.params.name, { dsp_name: dsp_name });
 });
 
 app.get("/:name", (req, res) => {
+  res.header({
+    'Permissions-Policy': `attribution-reporting=(self "https://${dsp_name}")`
+  });
   res.render(__dirname + "/public/" + req.params.name, { dsp_name: dsp_name });
 });
 
