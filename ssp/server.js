@@ -3,9 +3,11 @@ const express = require("express");
 const https = require("https");
 
 const app = express();
+app.set('view engine', 'ejs');
 const port = process.env.PORT;
 const key = process.env.KEY;
 const cert = process.env.CERT;
+const dsp_name = process.env.DSP_NAME;
 
 const server = https.createServer(
   {
@@ -14,6 +16,10 @@ const server = https.createServer(
   },
   app
 );
+
+app.get("/run_ad_auction.js", (req, res) => {
+  res.render(__dirname + "/public/run_ad_auction", { dsp_name: dsp_name });
+});
 
 // routes
 app.get("/:name", (req, res) => {
